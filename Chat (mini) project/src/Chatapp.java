@@ -20,5 +20,6 @@ public class Chatapp extends Application{
 	   	model = new LoginScreenModel();
 	   	view = new LoginScreenView(stage, model);
 	   	controller = new LoginScreenController(model, view);
+	   	//test
 	}
 }
