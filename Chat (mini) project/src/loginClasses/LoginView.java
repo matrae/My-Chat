@@ -28,6 +28,7 @@ public class LoginView extends View<LoginModel> {
 	private TextField txtUsername;
 	private PasswordField txtPassword;
 	private Button btnLogin;
+	private Button btnCreatacc;
 	
 	// Menu label
 	private Menu languageMenu;
@@ -49,6 +50,7 @@ public class LoginView extends View<LoginModel> {
 		txtUsername = new TextField();
 		txtPassword = new PasswordField();
 		btnLogin = new Button();
+		btnCreatacc = new Button();
 		
 		//Add paddings to pane
 		gridPane.setPadding(new Insets(10,10,10,10));
@@ -62,6 +64,7 @@ public class LoginView extends View<LoginModel> {
 	    gridPane.add(lblPassword,0,1);
 	    gridPane.add(txtPassword,1,1);
 	    gridPane.add(btnLogin,1,2);
+	    gridPane.add(btnCreatacc,1,3);
 	    
 		return gridPane;
 	}
@@ -75,6 +78,7 @@ public class LoginView extends View<LoginModel> {
 		lblUsername.setText(trans.getString("program.login.Username"));
 		lblPassword.setText(trans.getString("program.login.Password"));
 		btnLogin.setText(trans.getString("program.login.Login"));
+		btnCreatacc.setText(trans.getString("program.login.Createacc"));
 		
 		//Menut text
 		languageMenu.setText(trans.getString("program.menu.file.language"));

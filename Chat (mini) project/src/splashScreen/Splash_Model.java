@@ -49,13 +49,16 @@ public class Splash_Model extends Model {
             serviceLocator.setTranslator(new Translator(language));
             this.updateProgress(5,  100000000);
             
+            
+            this.updateProgress(100000000,  100000000);
             // ... more resources would go here...
             // fake loadbar
-            Integer i = 6;
-            while (i != 100000000) {
-            this.updateProgress(i,  100000000);
-            i++;
-            }      
+           
+            //Integer i = 0;
+            //while (i != 100000000) {
+            //this.updateProgress(i,  100000000);
+            //i++;
+            //}      
 
             return null;
         }
