@@ -1,10 +1,11 @@
+package App;
 import Controller.LoginScreenController;
 import Model.LoginScreenModel;
 import View.LoginScreenView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class Chatapp extends Application{
+public class ChatappOld extends Application{
 	
 	LoginScreenModel model;
 	LoginScreenView view;
