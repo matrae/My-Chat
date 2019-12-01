@@ -72,6 +72,11 @@ public class ChatApp extends Application {
         // Display the splash screen and begin the initialization
         splashModel.initialize();
     }
+    
+    // Additionally there is a login screen start method, mram
+    public void startLogin() {
+    	
+    }
 
     /**
      * This method is called when the splash screen has finished initializing
