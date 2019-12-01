@@ -31,6 +31,7 @@ public class LoginView extends View<LoginModel> {
 	
 	// Menu label
 	private Menu languageMenu;
+	private Menu helpMenu;
      
 
 	public LoginView(Stage stage, LoginModel model) {
@@ -70,9 +71,14 @@ public class LoginView extends View<LoginModel> {
 		Translator trans = ServiceLocator.getServiceLocator().getTranslator();
 		
 		//Set reference to Trnaslation
+		//LoginScreen
 		lblUsername.setText(trans.getString("program.login.Username"));
 		lblPassword.setText(trans.getString("program.login.Password"));
 		btnLogin.setText(trans.getString("program.login.Login"));
+		
+		//Menut text
+		languageMenu.setText(trans.getString("program.menu.file.language"));
+		helpMenu.setText(trans.getString("program.menu.help"));
 	}
 	
 	private MenuBar createMenuBar()  {
@@ -81,9 +87,9 @@ public class LoginView extends View<LoginModel> {
 		//Create menubar
 		MenuBar menu = new MenuBar();
 				
-		//Menus
-		languageMenu = new Menu("Language");
-		Menu helpMenu = new Menu("Help");
+		//Menus without text, text is set in update method
+		languageMenu = new Menu();
+		helpMenu = new Menu();
 		        
 		//Add menus to menubar
 		menu.getMenus().addAll(languageMenu, helpMenu);
