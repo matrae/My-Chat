@@ -51,9 +51,10 @@ public class Splash_Model extends Model {
             
             // ... more resources would go here...
             this.updateProgress(6,  6);
+            
+            //Fake resource counter here
             Integer i = 0;
-            while (i != 100000000)
-            	i++;
+            while (i != 100000000) i++;
            
 
             return null;

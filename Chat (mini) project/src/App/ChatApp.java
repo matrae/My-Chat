@@ -5,6 +5,9 @@ import chatClasses.ChatView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import loginClasses.LoginController;
+import loginClasses.LoginModel;
+import loginClasses.LoginView;
 import splashScreen.Splash_Controller;
 import splashScreen.Splash_Model;
 import splashScreen.Splash_View;
@@ -19,7 +22,8 @@ import splashScreen.Splash_View;
 public class ChatApp extends Application {
     private static ChatApp mainProgram; // singleton
     private Splash_View splashView;
-    private ChatView view;
+    private LoginView loginView;
+    private ChatView chatView;
 
     private ServiceLocator serviceLocator; // resources, after initialization
 
@@ -73,11 +77,7 @@ public class ChatApp extends Application {
         splashModel.initialize();
     }
     
-    // Additionally there is a login screen start method, mram
-    public void startLogin() {
-    	
-    }
-
+    
     /**
      * This method is called when the splash screen has finished initializing
      * the application. The initialized resources are in a ServiceLocator
@@ -89,15 +89,16 @@ public class ChatApp extends Application {
      * Thread, which means that it is allowed to work with GUI components.
      * http://docs.oracle.com/javafx/2/threads/jfxpub-threads.htm
      */
-    public void startApp() {
-        Stage appStage = new Stage();
+    // Additionally there is a login screen start method, mram
+    public void startLogin() {
+        Stage loginStage = new Stage();
 
         // Initialize the application MVC components. Note that these components
         // can only be initialized now, because they may depend on the
         // resources initialized by the splash screen
-        ChatModel model = new ChatModel();
-        view = new ChatView(appStage, model);
-        new ChatController(model, view);
+        LoginModel model = new LoginModel();
+        loginView = new LoginView(loginStage, model);
+        new LoginController(model, loginView);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
@@ -107,7 +108,29 @@ public class ChatApp extends Application {
         splashView.stop();
         splashView = null;
 
-        view.start();
+        loginView.start();
+    }
+
+
+    public void startApp() {
+        Stage appStage = new Stage();
+
+        // Initialize the application MVC components. Note that these components
+        // can only be initialized now, because they may depend on the
+        // resources initialized by the splash screen
+        ChatModel model = new ChatModel();
+        chatView = new ChatView(appStage, model);
+        new ChatController(model, chatView);
+
+        // Resources are now initialized
+        serviceLocator = ServiceLocator.getServiceLocator();
+
+        // Close the splash screen, and set the reference to null, so that all
+        // Splash_XXX objects can be garbage collected
+        splashView.stop();
+        splashView = null;
+
+        chatView.start();
     }
 
     /**
@@ -119,12 +142,14 @@ public class ChatApp extends Application {
      * Make the GUI invisible first. This prevents the user from taking any
      * actions while the program is ending.
      */
+    
+    // Maybe delete
     @Override
     public void stop() {
         serviceLocator.getConfiguration().save();
-        if (view != null) {
+        if (loginView != null) {
             // Make the view invisible
-            view.stop();
+            loginView.stop();
         }
 
         // More cleanup code as needed

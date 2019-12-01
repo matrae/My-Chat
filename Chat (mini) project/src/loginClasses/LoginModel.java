@@ -1,5 +1,7 @@
 package loginClasses;
 
-public class LoginModel {
+import abstractClasses.Model;
+
+public class LoginModel extends Model {
 
 }
