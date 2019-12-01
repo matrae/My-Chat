@@ -32,30 +32,30 @@ public class Splash_Model extends Model {
     final Task<Void> initializer = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
-            this.updateProgress(1,  6);
+            this.updateProgress(1,  100000000);
 
             // Create the service locator to hold our resources
             serviceLocator = ServiceLocator.getServiceLocator();
-            this.updateProgress(2,  6);
+            this.updateProgress(2,  100000000);
 
             // Initialize the resources in the service locator
             serviceLocator.setLogger(configureLogging());
-            this.updateProgress(3,  6);
+            this.updateProgress(3,  100000000);
 
             serviceLocator.setConfiguration(new Configuration());
-            this.updateProgress(4,  6);
+            this.updateProgress(4,  100000000);
 
             String language = serviceLocator.getConfiguration().getOption("Language");
             serviceLocator.setTranslator(new Translator(language));
-            this.updateProgress(5,  6);
+            this.updateProgress(5,  100000000);
             
             // ... more resources would go here...
-            this.updateProgress(6,  6);
-            
-            //Fake resource counter here
-            Integer i = 0;
-            while (i != 100000000) i++;
-           
+            // fake loadbar
+            Integer i = 6;
+            while (i != 100000000) {
+            this.updateProgress(i,  100000000);
+            i++;
+            }      
 
             return null;
         }

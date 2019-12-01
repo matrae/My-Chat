@@ -1,5 +1,7 @@
 package loginClasses;
 
+import java.util.Locale;
+
 import App.ServiceLocator;
 import abstractClasses.View;
 import commonClasses.Translator;
@@ -20,18 +22,20 @@ import javafx.stage.Stage;
 
 public class LoginView extends View<LoginModel> {
 	
+	// Labels for Login
 	private Label lblUsername;
 	private Label lblPassword;
 	private TextField txtUsername;
 	private PasswordField txtPassword;
 	private Button btnLogin;
-
+	
+	// Menu label
+	private Menu languageMenu;
+     
 
 	public LoginView(Stage stage, LoginModel model) {
 		super(stage, model);
 		// TODO Auto-generated constructor stub
-		
-		create_GUI();
 	}
 		
 	private Pane createLoginGrid() {
@@ -64,6 +68,7 @@ public class LoginView extends View<LoginModel> {
 	public void updateText() {
 		// ehm okey -> need to understand before exam
 		Translator trans = ServiceLocator.getServiceLocator().getTranslator();
+		
 		//Set reference to Trnaslation
 		lblUsername.setText(trans.getString("program.login.Username"));
 		lblPassword.setText(trans.getString("program.login.Password"));
@@ -75,32 +80,41 @@ public class LoginView extends View<LoginModel> {
 		
 		//Create menubar
 		MenuBar menu = new MenuBar();
-		
+				
 		//Menus
-        Menu languageMenu = new Menu("Language");
-        Menu helpMenu = new Menu("Help");
-       
-        //Menuitems
-        MenuItem english = new MenuItem("English");
-        MenuItem german = new MenuItem("German");
-        
-        // Add menuItems to the Menus
-        languageMenu.getItems().addAll(english, german);
-        
-        //Add menus to menubar
-        menu.getMenus().addAll(languageMenu, helpMenu);
-		
+		languageMenu = new Menu("Language");
+		Menu helpMenu = new Menu("Help");
+		        
+		//Add menus to menubar
+		menu.getMenus().addAll(languageMenu, helpMenu);
+		        
 		return menu;
 	}
 
 	@Override
 	protected Scene create_GUI() {
+		// Understand
+		ServiceLocator serviceL = ServiceLocator.getServiceLocator();
+		
 		BorderPane borderPane = new BorderPane();
 	    borderPane.setCenter(createLoginGrid());
 	    borderPane.setTop(createMenuBar());
 	    stage.setResizable(false);
 	    
+	    // Source: Bradley App View
+	    for (Locale locale : serviceL.getLocales()) {
+            MenuItem language = new MenuItem(locale.getLanguage());
+            languageMenu.getItems().add(language);
+            language.setOnAction(event -> {
+            	serviceL.getConfiguration().setLocalOption("Language", locale.getLanguage());
+            	serviceL.setTranslator(new Translator(locale.getLanguage()));
+            	updateText();
+             
+            });
+        }
+	    
 		scene = new Scene(borderPane,400,250);
+	
 		updateText();
 	
 		return scene;
