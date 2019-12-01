@@ -1,6 +1,8 @@
 package loginClasses;
 
+import App.ServiceLocator;
 import abstractClasses.View;
+import commonClasses.Translator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,11 +19,18 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class LoginView extends View<LoginModel> {
+	
+	private Label lblUsername;
+	private Label lblPassword;
+	private TextField txtUsername;
+	private PasswordField txtPassword;
+	private Button btnLogin;
+
 
 	public LoginView(Stage stage, LoginModel model) {
 		super(stage, model);
 		// TODO Auto-generated constructor stub
-	
+		
 		create_GUI();
 	}
 		
@@ -30,11 +39,11 @@ public class LoginView extends View<LoginModel> {
 		GridPane gridPane = new GridPane();
 		
 		//Buttons, labels and textields
-		Label lblUsername = new Label("Username");
-		Label lblPassword = new Label("Password");
-		TextField txtUsername = new TextField();
-		PasswordField txtPassword = new PasswordField();
-		Button btnLogin = new Button("Login");
+		lblUsername = new Label();
+		lblPassword = new Label();
+		txtUsername = new TextField();
+		txtPassword = new PasswordField();
+		btnLogin = new Button();
 		
 		//Add paddings to pane
 		gridPane.setPadding(new Insets(10,10,10,10));
@@ -50,6 +59,15 @@ public class LoginView extends View<LoginModel> {
 	    gridPane.add(btnLogin,1,2);
 	    
 		return gridPane;
+	}
+	
+	public void updateText() {
+		// ehm okey -> need to understand before exam
+		Translator trans = ServiceLocator.getServiceLocator().getTranslator();
+		//Set reference to Trnaslation
+		lblUsername.setText(trans.getString("program.login.Username"));
+		lblPassword.setText(trans.getString("program.login.Password"));
+		btnLogin.setText(trans.getString("program.login.Login"));
 	}
 	
 	private MenuBar createMenuBar()  {
@@ -83,8 +101,10 @@ public class LoginView extends View<LoginModel> {
 	    stage.setResizable(false);
 	    
 		scene = new Scene(borderPane,400,250);
-		
+		updateText();
+	
 		return scene;
+		
 	}
 
 }
