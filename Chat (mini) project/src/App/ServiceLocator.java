@@ -27,7 +27,7 @@ public class ServiceLocator {
     final private String APP_NAME = "ChatApp";
     
     // Supported locales (for translations)
-    final private Locale[] locales = new Locale[] { new Locale("en"), new Locale("de") };
+    final private Locale[] locales = new Locale[] { new Locale("en"), new Locale("de"),  new Locale("jp") };
 
     // Resources
     private Logger logger;
