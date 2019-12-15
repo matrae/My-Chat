@@ -1,5 +1,7 @@
 package loginClasses;
 
+import java.io.IOException;
+
 import App.ChatApp;
 import abstractClasses.Controller;
 import abstractClasses.View;
@@ -17,14 +19,33 @@ public class LoginController extends Controller<LoginModel, LoginView>{
       		main.startApp();
       	});
       	
+      	
+      	
+      	
+      	
+      	
+      	
+      	
+      	
+      	
+      	
+      	
+      	
+      	
+      	
+      	
       	// Creates the popup window where you can create an account
       	view.getCreateAccButton().setOnAction(event -> {
       		view.createAccountPopup();
       		view.getCreate().setOnAction(event1 -> {
-      			System.out.println("test");
+      			try {
+					model.createAccount(view.getCreateUsername(), view.getCreatePassword());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
       		});
-      		
-      	});
+     	});
 	}
 }
 

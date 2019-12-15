@@ -204,6 +204,16 @@ public class LoginView extends View<LoginModel> {
 	public Stage getPopupStage() {
 		return createAccountPopup;
 	}
+	
+	public String getCreateUsername() {
+        String username = txtCreateUsername.getText();
+        return username;
+	}
+	
+    public String getCreatePassword() {
+        String password = txtCreatePassword.getText();
+        return password;
+    }
 
 
 }

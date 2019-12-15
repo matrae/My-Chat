@@ -155,4 +155,10 @@ public class Configuration {
     public void setLocalOption(String name, String value) {
         localOptions.setProperty(name, value);
     }
+
+
+	public Socket getSocket() {
+		// TODO Auto-generated method stub
+		return socket;
+	}
 }
