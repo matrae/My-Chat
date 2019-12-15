@@ -195,5 +195,10 @@ public class LoginView extends View<LoginModel> {
 	public Button getCreateAccButton() {
 		return btnCreatacc;
 	}
+	
+	public Button getCreate() {
+		return create;
+	}
+
 
 }

@@ -49,6 +49,8 @@ public class Splash_Model extends Model {
             
         	//Connect to server
         	serviceLocator.getConfiguration().connectServer();
+        	//Setup Server Communication
+        	serviceLocator.getConfiguration().communicateServer();
 
             String language = serviceLocator.getConfiguration().getOption("Language");
             serviceLocator.setTranslator(new Translator(language));

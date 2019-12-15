@@ -2,11 +2,14 @@ package commonClasses;
 
 
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
@@ -53,10 +56,38 @@ public class Configuration {
     	}
     }
     
+    Thread communicationThread;
+    
     // SERVER COMMUNICATION
-    public void communicateServer () {
-    	
-    }
+    public void communicateServer() {
+		try {
+			BufferedReader socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));		
+						
+				// Create thread to read incoming messages
+				communicationThread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					while (true) {
+						String msg;
+						try {
+							//Reads incoming messages
+							msg = socketIn.readLine();
+							logger.info("Received: " + msg);
+						} catch (IOException e) {
+							break;
+						}
+					}
+				}
+			});
+			// Thread is closed when program is closed
+	        communicationThread.setDaemon(true);
+	        communicationThread.start();	
+	        
+		} catch (IOException e) {
+            e.printStackTrace();
+		}
+	}
+
     
     public Configuration() {
         // Load default properties from wherever the code is
