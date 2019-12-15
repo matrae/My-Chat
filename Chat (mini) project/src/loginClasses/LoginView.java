@@ -140,12 +140,13 @@ public class LoginView extends View<LoginModel> {
 		
 	}
 	
+	private GridPane popupAccount;
 	// Create popup to create an account
 	public void createAccountPopup() {
 		createAccountPopup = new Stage();
 		createAccountPopup.initModality(Modality.APPLICATION_MODAL);
 		
-		GridPane popupAccount = new GridPane();
+		popupAccount = new GridPane();
 		popupAccount.setId("Create an Account");
 		
 		createAccountPopup.setResizable(false);
@@ -173,7 +174,7 @@ public class LoginView extends View<LoginModel> {
 		
 		Scene popupAccountScene = new Scene(popupAccount);
 		createAccountPopup.setScene(popupAccountScene);
-		createAccountPopup.showAndWait();
+		createAccountPopup.show();
 		
 	}
 	
@@ -198,6 +199,10 @@ public class LoginView extends View<LoginModel> {
 	
 	public Button getCreate() {
 		return create;
+	}
+	
+	public Stage getPopupStage() {
+		return createAccountPopup;
 	}
 
 
