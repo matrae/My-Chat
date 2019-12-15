@@ -32,6 +32,8 @@ public class Splash_Model extends Model {
     final Task<Void> initializer = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+
+
             this.updateProgress(1,  100000000);
 
             // Create the service locator to hold our resources
@@ -44,6 +46,9 @@ public class Splash_Model extends Model {
 
             serviceLocator.setConfiguration(new Configuration());
             this.updateProgress(4,  100000000);
+            
+        	//Connect to server
+        	serviceLocator.getConfiguration().connectServer();
 
             String language = serviceLocator.getConfiguration().getOption("Language");
             serviceLocator.setTranslator(new Translator(language));

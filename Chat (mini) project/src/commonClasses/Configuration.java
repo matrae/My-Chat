@@ -7,14 +7,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.logging.Logger;
 
 import App.ServiceLocator;
-
-
-
 
 
 /**
@@ -31,11 +30,28 @@ import App.ServiceLocator;
  */
 public class Configuration {
     ServiceLocator sl = ServiceLocator.getServiceLocator();  // for easy reference
-    Logger logger = sl.getLogger();                          // for easy reference
+    Logger logger = sl.getLogger();       					// for easy reference
 
     private Properties defaultOptions;
     private Properties localOptions;
+    
+    // Server information
+    String ipAddress = "147.86.8.31";
+    int portNumber = 50001;
+    private Socket socket = null;
 
+    //Establish Connection with server here
+    public void connectServer() throws IOException {        
+    	// Not safe connection implemented
+    	socket = new Socket(ipAddress, portNumber);
+    	
+    	if (socket.isConnected() == false) {
+    		logger.info("No Server Connection - Something went wrong");
+    	} else {
+    		logger.info("Server Connected succesfully");
+    	}
+    }
+    
     public Configuration() {
         // Load default properties from wherever the code is
         defaultOptions = new Properties();
@@ -70,7 +86,7 @@ public class Configuration {
             } catch (Exception ignore) {
             }
         }
-        
+           
         for (Enumeration<Object> i = localOptions.keys(); i.hasMoreElements();) {
             String key = (String) i.nextElement();
             logger.config("Option: " + key + " = " + localOptions.getProperty(key));
