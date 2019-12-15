@@ -14,6 +14,10 @@ public class LoginController extends Controller<LoginModel, LoginView>{
       	view.getLoginButton().setOnAction(event -> {
       		main.startApp();
       	});
+      	
+      	view.getCreateAccButton().setOnAction(ecent -> {
+      		view.createAccountPopup();
+      	});
 
 	}	
 }

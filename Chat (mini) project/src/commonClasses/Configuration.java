@@ -40,7 +40,8 @@ public class Configuration {
     int portNumber = 50001;
     private Socket socket = null;
 
-    //Establish Connection with server here
+    
+    //Establish SERVER CONNECTOIN
     public void connectServer() throws IOException {        
     	// Not safe connection implemented
     	socket = new Socket(ipAddress, portNumber);
@@ -50,6 +51,11 @@ public class Configuration {
     	} else {
     		logger.info("Server Connected succesfully");
     	}
+    }
+    
+    // SERVER COMMUNICATION
+    public void communicateServer () {
+    	
     }
     
     public Configuration() {

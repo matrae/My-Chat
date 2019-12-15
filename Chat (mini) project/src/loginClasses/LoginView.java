@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LoginView extends View<LoginModel> {
@@ -34,6 +35,14 @@ public class LoginView extends View<LoginModel> {
 	private Menu languageMenu;
 	private Menu helpMenu;
      
+	// Create account stuff
+	private Stage createAccountPopup;
+	private Button create;
+	private Label lblCreateUsername;
+	private Label lblCreatePassword;
+	private TextField txtCreateUsername;
+	private PasswordField txtCreatePassword;
+	private Button btnCreateCreatacc;
 
 	public LoginView(Stage stage, LoginModel model) {
 		super(stage, model);
@@ -131,9 +140,60 @@ public class LoginView extends View<LoginModel> {
 		
 	}
 	
+	// Create popup to create an account
+	public void createAccountPopup() {
+		createAccountPopup = new Stage();
+		createAccountPopup.initModality(Modality.APPLICATION_MODAL);
+		
+		GridPane popupAccount = new GridPane();
+		popupAccount.setId("Create an Account");
+		
+		createAccountPopup.setResizable(false);
+		createAccountPopup.setHeight(250);
+        createAccountPopup.setWidth(300);
+		popupAccount.setPadding(new Insets(10,10,10,10));
+		popupAccount.setHgap(10);
+		popupAccount.setVgap(10);
+        popupAccount.setAlignment(Pos.CENTER);
+		
+		lblCreateUsername = new Label();
+		lblCreatePassword = new Label();
+		txtCreateUsername = new TextField();
+		txtCreatePassword = new PasswordField();
+		create = new Button();
+		
+		popupAccount.add(lblCreateUsername,0,0);
+		popupAccount.add(txtCreateUsername,1,0);
+		popupAccount.add(lblCreatePassword,0,1);
+		popupAccount.add(txtCreatePassword,1,1);
+		popupAccount.add(create,1,2);
+		
+		//Update the labels
+		updateCreateAccount();
+		
+		Scene popupAccountScene = new Scene(popupAccount);
+		createAccountPopup.setScene(popupAccountScene);
+		createAccountPopup.showAndWait();
+		
+	}
+	
+	public void updateCreateAccount() {
+		// ehm okey -> need to understand before exam
+		Translator trans = ServiceLocator.getServiceLocator().getTranslator();
+		
+		//Reference to file
+		lblCreateUsername.setText(trans.getString("program.login.Username"));
+		lblCreatePassword.setText(trans.getString("program.login.Password"));
+		create.setText(trans.getString("program.login.Createacc"));
+	}
+	
 	//getter for button, mram
 	public Button getLoginButton() {
 		return btnLogin;
+	}
+	
+	public Button getCreateAccButton() {
+		return btnCreatacc;
 	}
 
 }
