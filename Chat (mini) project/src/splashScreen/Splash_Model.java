@@ -50,15 +50,15 @@ public class Splash_Model extends Model {
             this.updateProgress(5,  100000000);
             
             
-            this.updateProgress(100000000,  100000000);
+            
             // ... more resources would go here...
             // fake loadbar
-           
             //Integer i = 0;
             //while (i != 100000000) {
             //this.updateProgress(i,  100000000);
             //i++;
-            //}      
+            //}   
+            this.updateProgress(100000000,  100000000);
 
             return null;
         }

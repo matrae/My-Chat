@@ -130,5 +130,10 @@ public class LoginView extends View<LoginModel> {
 		return scene;
 		
 	}
+	
+	//getter for button, mram
+	public Button getLoginButton() {
+		return btnLogin;
+	}
 
 }

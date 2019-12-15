@@ -98,7 +98,7 @@ public class ChatApp extends Application {
         // resources initialized by the splash screen
         LoginModel model = new LoginModel();
         loginView = new LoginView(loginStage, model);
-        new LoginController(model, loginView);
+        new LoginController(this, model, loginView);
 
         // Resources are now initialized
         serviceLocator = ServiceLocator.getServiceLocator();
@@ -115,7 +115,7 @@ public class ChatApp extends Application {
 
     public void startApp() {
         Stage appStage = new Stage();
-
+ 
         // Initialize the application MVC components. Note that these components
         // can only be initialized now, because they may depend on the
         // resources initialized by the splash screen
@@ -128,10 +128,11 @@ public class ChatApp extends Application {
 
         // Close the splash screen, and set the reference to null, so that all
         // Splash_XXX objects can be garbage collected
-        splashView.stop();
-        splashView = null;
+        loginView.stop();
+        loginView = null;
 
         chatView.start();
+        serviceLocator.getLogger().info("App View started");
     }
 
     /**
