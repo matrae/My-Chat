@@ -215,5 +215,17 @@ public class LoginView extends View<LoginModel> {
         return password;
     }
 
+	public String getUsername() {
+		// TODO Auto-generated method stub
+        String username = txtUsername.getText();
+        return username;
+	}
+
+	public String getPassword() {
+		// TODO Auto-generated method stub
+        String password = txtPassword.getText();
+        return password;
+	}
+
 
 }

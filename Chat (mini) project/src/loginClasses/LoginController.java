@@ -16,21 +16,16 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 		
 		//Prov starts the chat view until login is implemented
       	view.getLoginButton().setOnAction(event -> {
+  			try {
+				model.login(view.getUsername(), view.getPassword());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
       		main.startApp();
       	});
       	
-      	
-      	
-      	
-      	
-      	
-      	
-      	
-      	
-      	
-      	
-      	
-      	
+   
       	
       	
       	
