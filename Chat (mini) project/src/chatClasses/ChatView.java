@@ -46,6 +46,8 @@ public class ChatView extends View<ChatModel> {
 		ServiceLocator serviceL = ServiceLocator.getServiceLocator();
 		
 		BorderPane borderPane = new BorderPane();
+		borderPane.setLeft(createChatrooms());
+		borderPane.setCenter(createMessageView());
 		borderPane.setBottom(createMessSend());
 		borderPane.setTop(createMenuBar());
 		stage.setResizable(false);
@@ -69,6 +71,16 @@ public class ChatView extends View<ChatModel> {
 		return scene;
 	}
 	
+	// Display the Messages in a List maybe
+	private Pane createMessageView() {
+		return null;
+	}
+	
+	// Display all Chatrooms on the Server
+	private Pane createChatrooms() {
+		return null;
+	}
+	
 	private Pane createMessSend() {
 		// Our main chat pane
 				
@@ -81,22 +93,22 @@ public class ChatView extends View<ChatModel> {
 		messSend.getChildren().addAll(txtMessage, btnSend);		
 		
 		return messSend;
-	}
-	
-	
-	
+	}	
+
 	private void updateText() {
 		// ehm okey -> need to understand before exam
 		Translator trans = ServiceLocator.getServiceLocator().getTranslator();
 		
 		//Set reference to Trnaslation
 		//LoginScreen
-		btnSend.setText(trans.getString("program.login.send"));
+		btnSend.setText(trans.getString("program.chat.send"));
 		
 		//Menutext
 		languageMenu.setText(trans.getString("program.menu.file.language"));
 		helpMenu.setText(trans.getString("program.menu.help"));
 		settings.setText(trans.getString("program.menu.settings"));
+		logout.setText(trans.getString("program.menu.logout"));
+		setIP.setText(trans.getString("program.menu.setIP"));
 	}
 	
 	private MenuBar createMenuBar() {
