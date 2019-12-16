@@ -40,6 +40,7 @@ public class LoginView extends View<LoginModel> {
 	private Button create;
 	private Label lblCreateUsername;
 	private Label lblCreatePassword;
+	private Label lblInstructions;
 	private TextField txtCreateUsername;
 	private PasswordField txtCreatePassword;
 	private Button btnCreateCreatacc;
@@ -133,7 +134,7 @@ public class LoginView extends View<LoginModel> {
         }
 	    
 		scene = new Scene(borderPane,400,250);
-	
+		scene.getStylesheets().addAll(this.getClass().getResource("login.css").toExternalForm());
 		updateText();
 	
 		return scene;
@@ -157,22 +158,26 @@ public class LoginView extends View<LoginModel> {
 		popupAccount.setVgap(10);
         popupAccount.setAlignment(Pos.CENTER);
 		
+        lblInstructions	= new Label();
 		lblCreateUsername = new Label();
 		lblCreatePassword = new Label();
 		txtCreateUsername = new TextField();
 		txtCreatePassword = new PasswordField();
 		create = new Button();
 		
-		popupAccount.add(lblCreateUsername,0,0);
-		popupAccount.add(txtCreateUsername,1,0);
-		popupAccount.add(lblCreatePassword,0,1);
-		popupAccount.add(txtCreatePassword,1,1);
-		popupAccount.add(create,1,2);
+		GridPane.setColumnSpan(lblInstructions, 2);
+		popupAccount.add(lblInstructions,0,0);
+		popupAccount.add(lblCreateUsername,0,1);
+		popupAccount.add(txtCreateUsername,1,1);
+		popupAccount.add(lblCreatePassword,0,2);
+		popupAccount.add(txtCreatePassword,1,2);
+		popupAccount.add(create,1,3);
 		
 		//Update the labels
 		updateCreateAccount();
 		
 		Scene popupAccountScene = new Scene(popupAccount);
+		popupAccount.getStylesheets().addAll(this.getClass().getResource("login.css").toExternalForm());
 		createAccountPopup.setScene(popupAccountScene);
 		createAccountPopup.show();
 		
@@ -185,6 +190,7 @@ public class LoginView extends View<LoginModel> {
 		//Reference to file
 		lblCreateUsername.setText(trans.getString("program.login.Username"));
 		lblCreatePassword.setText(trans.getString("program.login.Password"));
+		lblInstructions.setText(trans.getString("program.login.instruction"));
 		create.setText(trans.getString("program.login.Createacc"));
 	}
 	
