@@ -40,7 +40,7 @@ public class LoginView extends View<LoginModel> {
 	private Button create;
 	private Label lblCreateUsername;
 	private Label lblCreatePassword;
-	private Label lblInstructions;
+	private Label lblInstructions; 
 	private TextField txtCreateUsername;
 	private PasswordField txtCreatePassword;
 	private Button btnCreateCreatacc;
@@ -64,8 +64,8 @@ public class LoginView extends View<LoginModel> {
 		
 		//Add paddings to pane
 		gridPane.setPadding(new Insets(10,10,10,10));
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
+        gridPane.setHgap(70);
+        gridPane.setVgap(20);
         gridPane.setAlignment(Pos.CENTER);
 		
 		//Adding all buttons, labels, txt fields to grid Pane
@@ -133,7 +133,7 @@ public class LoginView extends View<LoginModel> {
             });
         }
 	    
-		scene = new Scene(borderPane,400,250);
+		scene = new Scene(borderPane,600,350);
 		scene.getStylesheets().addAll(this.getClass().getResource("login.css").toExternalForm());
 		updateText();
 	
