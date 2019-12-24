@@ -30,6 +30,7 @@ public class LoginView extends View<LoginModel> {
 	private PasswordField txtPassword;
 	private Button btnLogin;
 	private Button btnCreatacc;
+	private Label lblWrongInput;
 	
 	// Menu label
 	private Menu languageMenu;
@@ -46,7 +47,7 @@ public class LoginView extends View<LoginModel> {
 	private PasswordField txtCreatePassword;
 	private PasswordField txtRepeatPassword;
 	private Button btnCreateCreatacc;
-
+	
 	public LoginView(Stage stage, LoginModel model) {
 		super(stage, model);
 		// TODO Auto-generated constructor stub
@@ -64,19 +65,30 @@ public class LoginView extends View<LoginModel> {
 		btnLogin = new Button();
 		btnCreatacc = new Button();
 		
+		//new label for
+		lblWrongInput = new Label();
+		
 		//Add paddings to pane
 		gridPane.setPadding(new Insets(10,10,10,10));
-        gridPane.setHgap(70);
+        gridPane.setHgap(20);
         gridPane.setVgap(20);
         gridPane.setAlignment(Pos.CENTER);
+        
+        //Merge column span of txt fields
+        GridPane.setColumnSpan(txtPassword, 2);
+        GridPane.setColumnSpan(txtUsername, 2);
+        GridPane.setColumnSpan(lblWrongInput, 3);
 		
 		//Adding all buttons, labels, txt fields to grid Pane
 	    gridPane.add(lblUsername,0,0);
 	    gridPane.add(txtUsername,1,0);
 	    gridPane.add(lblPassword,0,1);
 	    gridPane.add(txtPassword,1,1);
-	    gridPane.add(btnLogin,1,2);
-	    gridPane.add(btnCreatacc,1,3);
+	    gridPane.add(lblWrongInput,1,2);
+	    gridPane.add(btnLogin,1,3);
+	    gridPane.add(btnCreatacc,2,3);
+	    
+	    lblWrongInput.setVisible(model.getState());
 	    
 		return gridPane;
 	}
@@ -91,6 +103,8 @@ public class LoginView extends View<LoginModel> {
 		lblPassword.setText(trans.getString("program.login.Password"));
 		btnLogin.setText(trans.getString("program.login.Login"));
 		btnCreatacc.setText(trans.getString("program.login.Createacc"));
+		lblWrongInput.setText(trans.getString("program.login.WrongInput"));
+		lblWrongInput.setVisible(model.getState());
 		
 		//Menut text
 		languageMenu.setText(trans.getString("program.menu.file.language"));
@@ -112,7 +126,7 @@ public class LoginView extends View<LoginModel> {
 		        
 		return menu;
 	}
-
+	
 	@Override
 	protected Scene create_GUI() {
 		// Understand

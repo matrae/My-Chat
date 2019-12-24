@@ -11,6 +11,8 @@ import abstractClasses.Model;
 public class LoginModel extends Model {
     ServiceLocator serviceLocator = ServiceLocator.getServiceLocator();
     private Socket socket = serviceLocator.getConfiguration().getSocket();
+    
+    private boolean passwordState = false;
 	
 	public void login(String username, String password) throws IOException {
 		
@@ -26,6 +28,22 @@ public class LoginModel extends Model {
         } catch (IOException e) {
             e.printStackTrace();
         }	
+	}
+	
+	public void validateLogin(ChatApp main) {
+		if (serviceLocator.getConfiguration().getToken() != null) {
+        	//start app view
+			main.startApp();
+			passwordState = false;
+		} else {
+			//Add error message
+			//changeState(passwordState);
+			passwordState = true;
+		}
+	}
+	
+	public boolean getState() {
+		return passwordState;
 	}
 	
 

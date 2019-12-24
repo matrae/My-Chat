@@ -18,18 +18,15 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 		//Prov starts the chat view until login is implemented
       	view.getLoginButton().setOnAction(event -> {
   			try {
+  				// In the login method the passsword is validated
 				model.login(view.getUsername(), view.getPassword());
-				//check if login message was true
-				if (1==1) {
-					//check if login worked
-					
-					//Display Chatrooms
-					main.startApp();
-				} else {
-					//Display a message that the login did not work
-					
-				} 
-  			} catch (IOException e) {
+				// add sleep because it validates to fast
+				Thread.sleep(400);
+				// Check if we got a true result login
+				model.validateLogin(main);
+				view.updateText();
+				
+  			} catch (IOException | InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
