@@ -40,9 +40,11 @@ public class LoginView extends View<LoginModel> {
 	private Button create;
 	private Label lblCreateUsername;
 	private Label lblCreatePassword;
+	private Label lblRepeatPassword;
 	private Label lblInstructions; 
 	private TextField txtCreateUsername;
 	private PasswordField txtCreatePassword;
+	private PasswordField txtRepeatPassword;
 	private Button btnCreateCreatacc;
 
 	public LoginView(Stage stage, LoginModel model) {
@@ -151,19 +153,25 @@ public class LoginView extends View<LoginModel> {
 		popupAccount.setId("Create an Account");
 		
 		createAccountPopup.setResizable(false);
-		createAccountPopup.setHeight(250);
-        createAccountPopup.setWidth(300);
+		createAccountPopup.setHeight(350);
+        createAccountPopup.setWidth(400);
 		popupAccount.setPadding(new Insets(10,10,10,10));
-		popupAccount.setHgap(10);
-		popupAccount.setVgap(10);
+		popupAccount.setHgap(20);
+		popupAccount.setVgap(20);
         popupAccount.setAlignment(Pos.CENTER);
 		
         lblInstructions	= new Label();
 		lblCreateUsername = new Label();
 		lblCreatePassword = new Label();
+		lblRepeatPassword = new Label();
 		txtCreateUsername = new TextField();
 		txtCreatePassword = new PasswordField();
+		txtRepeatPassword = new PasswordField();
 		create = new Button();
+		
+		lblInstructions.setWrapText(true);
+		lblInstructions.setMinHeight(90);
+
 		
 		GridPane.setColumnSpan(lblInstructions, 2);
 		popupAccount.add(lblInstructions,0,0);
@@ -171,7 +179,9 @@ public class LoginView extends View<LoginModel> {
 		popupAccount.add(txtCreateUsername,1,1);
 		popupAccount.add(lblCreatePassword,0,2);
 		popupAccount.add(txtCreatePassword,1,2);
-		popupAccount.add(create,1,3);
+		popupAccount.add(lblRepeatPassword,0,3);
+		popupAccount.add(txtRepeatPassword,1,3);
+		popupAccount.add(create,1,4);
 		
 		//Update the labels
 		updateCreateAccount();
@@ -190,6 +200,7 @@ public class LoginView extends View<LoginModel> {
 		//Reference to file
 		lblCreateUsername.setText(trans.getString("program.login.Username"));
 		lblCreatePassword.setText(trans.getString("program.login.Password"));
+		lblRepeatPassword.setText(trans.getString("program.login.RepeatPassword"));
 		lblInstructions.setText(trans.getString("program.login.instruction"));
 		create.setText(trans.getString("program.login.Createacc"));
 	}
@@ -220,6 +231,11 @@ public class LoginView extends View<LoginModel> {
         String password = txtCreatePassword.getText();
         return password;
     }
+    
+	public String getRepeatPassword() {
+		String passwordR = txtRepeatPassword.getText();
+		return passwordR;
+	}
 
 	public String getUsername() {
 		// TODO Auto-generated method stub
@@ -232,6 +248,4 @@ public class LoginView extends View<LoginModel> {
         String password = txtPassword.getText();
         return password;
 	}
-
-
 }

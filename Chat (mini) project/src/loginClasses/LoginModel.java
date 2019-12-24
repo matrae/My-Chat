@@ -27,21 +27,27 @@ public class LoginModel extends Model {
             e.printStackTrace();
         }	
 	}
+	
 
 	//Sends a message to the server to create the account
-	public void createAccount(String username, String password) throws IOException {
+	public void createAccount(String username, String password, String passwordR) throws IOException {
 		// TODO Auto-generated method stub
 		OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
-		//Message 
-		String createAccount = "CreateLogin" + "|" + username + "|" + password;
-		
-        try {
-            socketOut.write(createAccount + "\n");
-            socketOut.flush();
-            serviceLocator.getLogger().info("Sent: " + createAccount);
-            serviceLocator.getConfiguration().communicateServer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+		if (passwordR.contentEquals(password)) {
+			String createAccount = "CreateLogin" + "|" + username + "|" + password;
+	
+			try {
+				socketOut.write(createAccount + "\n");
+				socketOut.flush();
+				serviceLocator.getLogger().info("Sent: " + createAccount);
+				serviceLocator.getConfiguration().communicateServer();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			//Create an errormessage here
+			serviceLocator.getLogger().info("Password did not match");
+		}
 	}
 }

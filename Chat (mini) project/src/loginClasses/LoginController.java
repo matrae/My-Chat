@@ -43,12 +43,12 @@ public class LoginController extends Controller<LoginModel, LoginView>{
       	view.getCreateAccButton().setOnAction(event -> {
       		view.createAccountPopup();
       		view.getCreate().setOnAction(event1 -> {
-      			try {
-					model.createAccount(view.getCreateUsername(), view.getCreatePassword());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+      				try {
+      					model.createAccount(view.getCreateUsername(), view.getCreatePassword(), view.getRepeatPassword());
+      				} catch (IOException e) {
+      					// TODO Auto-generated catch block
+      					e.printStackTrace();
+      				}      			
       		});
      	});
 	}
