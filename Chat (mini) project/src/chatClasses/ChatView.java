@@ -20,6 +20,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ChatView extends View<ChatModel> {
@@ -45,11 +47,13 @@ public class ChatView extends View<ChatModel> {
 		
 		ServiceLocator serviceL = ServiceLocator.getServiceLocator();
 		
-		BorderPane borderPane = new BorderPane();
-		borderPane.setLeft(createChatrooms());
-		borderPane.setCenter(createMessageView());
-		borderPane.setBottom(createMessSend());
-		borderPane.setTop(createMenuBar());
+		
+		VBox basis = new VBox();
+		HBox roomsChat = new HBox();
+		roomsChat.getChildren().addAll(createChatrooms(), createMessSend());
+		basis.getChildren().addAll(createMenuBar(), roomsChat);
+		
+	
 		stage.setResizable(false);
 		
 		 // Source: Bradley App View
@@ -60,30 +64,26 @@ public class ChatView extends View<ChatModel> {
             	serviceL.getConfiguration().setLocalOption("Language", locale.getLanguage());
             	serviceL.setTranslator(new Translator(locale.getLanguage()));
             	updateText();
-             
             });
         }
-	    
-		scene = new Scene(borderPane,800,800);
-	
+		scene = new Scene(basis);
 		updateText();
-		
 		return scene;
 	}
 	
 	// Display the Messages in a List maybe
-	private Pane createMessageView() {
+	private HBox createMessageView() {
 		return null;
 	}
 	
-	// Display all Chatrooms on the Server
-	private Pane createChatrooms() {
-		return null;
+	// Display all Chatrooms on the Server 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Delete button and chagne
+	private Button createChatrooms() {
+		btnSend = new Button();
+		return btnSend;
 	}
 	
-	private Pane createMessSend() {
-		// Our main chat pane
-				
+	// Returns a HBox with a text field and a send button
+	private HBox createMessSend() {
 		// Create buttons, and textfields
 		btnSend = new Button();
 		txtMessage = new TextArea();
