@@ -37,6 +37,7 @@ public class Configuration {
 
     private Properties defaultOptions;
     private Properties localOptions;
+    private String token = null;
     
     // Server information
     String ipAddress = "147.86.8.31";
@@ -72,6 +73,7 @@ public class Configuration {
 						try {
 							//Reads incoming messages
 							msg = socketIn.readLine();
+							saveServerMessages(msg);
 							logger.info("Received: " + msg);
 						} catch (IOException e) {
 							break;
@@ -87,6 +89,19 @@ public class Configuration {
             e.printStackTrace();
 		}
 	}
+    
+    //Methods which saves the messages in an Array so that we can read the messages
+    public void saveServerMessages(String serverInput) {
+    	String[] msgArray = serverInput.split("\\|");
+    	
+    	if (msgArray[0].equals("Result") && msgArray[1].equals("true") && msgArray.length == 3)  {
+    		//Find out if its a login information
+    		token = msgArray[2];    		
+    	} else if (msgArray[0].equals("Result") && msgArray[1].equals("true") && msgArray.length != 3) {
+    		//all other messages
+    		
+    	}
+    }
 
     
     public Configuration() {
@@ -160,5 +175,11 @@ public class Configuration {
 	public Socket getSocket() {
 		// TODO Auto-generated method stub
 		return socket;
+	}
+
+
+	public String getToken() {
+		// TODO Auto-generated method stub
+		return token;
 	}
 }
