@@ -14,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
@@ -183,6 +184,26 @@ public class ChatView extends View<ChatModel> {
 	
 	public ListView<String> getChatRoomList() {
 		return lvChatRooms;
+	}
+
+	public Button getJoinChatroom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Button getLeaveChatroom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Button getCreateChatroom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Button getDeleteChatroom() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

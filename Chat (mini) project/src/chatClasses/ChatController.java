@@ -14,6 +14,7 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 
 	ServiceLocator serviceL = ServiceLocator.getServiceLocator();
 	
+	public ChatController(ChatModel model, ChatView view) {
 		super(model, view);
 		// TODO Auto-generated constructor stub
 		
@@ -28,14 +29,8 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 			e.printStackTrace();
 		}
 		
-		
+		/*
 		view.getJoinChatroom().setOnAction(e -> {
-			try {
-				model.joinChatroom(view.getChatRoomList().getSelectionModel().getSelectedItem(), chatModel.getUsername());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		});
 		
 		view.getLeaveChatroom().setOnAction(e -> {
@@ -49,6 +44,8 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		view.getDeleteChatroom().setOnAction(e -> {
 			
 		});
+		
+		*/
 	}
 	
 	
