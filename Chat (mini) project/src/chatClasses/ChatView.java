@@ -45,6 +45,12 @@ public class ChatView extends View<ChatModel> {
 	
 	// Chatrooms
 	private ListView<String> lvChatRooms;
+	// private ObservableList<String> obsLChatRooms;
+	private VBox chatRoomHolder;
+	private Button joinChatroom;
+	private Button leaveChatroom;
+	private Button createChatroom;
+	private Button deleteChatroom;
 	
 	public ChatView(Stage stage, ChatModel model) {
 		super(stage, model);
@@ -75,7 +81,8 @@ public class ChatView extends View<ChatModel> {
             	updateText();
             });
         }
-		scene = new Scene(basis);
+		scene = new Scene(basis, 1300, 800);
+		scene.getStylesheets().addAll(this.getClass().getResource("chat.css").toExternalForm());
 		updateText();
 		return scene;
 	}
@@ -85,24 +92,31 @@ public class ChatView extends View<ChatModel> {
 		return null;
 	}
 	
-	// private ObservableList<String> obsLChatRooms;
-	private VBox chatRoomHolder;
+
 	
 	// Display all Chatrooms on the Server 
 	private VBox createChatrooms() {
 		//display the Chatrooms from the server
+		
+		joinChatroom = new Button();
+		leaveChatroom = new Button();
+		createChatroom = new Button();
+		deleteChatroom = new Button();
+		
 		chatRoomHolder = new VBox();
-		
 		//We could use an observable list
-		//obsLChatRooms = FXCollections.observableArrayList();
-		
+		//obsLChatRooms = FXCollections.observableArrayList()
 		//Create a list view
 		lvChatRooms = new ListView();
 		
-		chatRoomHolder.getChildren().add(lvChatRooms);
-	    
-		return chatRoomHolder;
+		HBox roomButtons = new HBox();
+		roomButtons.setPadding(new Insets(10,10,10,10));
+		roomButtons.setSpacing(20);
 		
+		roomButtons.getChildren().addAll(joinChatroom,leaveChatroom,createChatroom,deleteChatroom);
+	
+		chatRoomHolder.getChildren().addAll(roomButtons, lvChatRooms);
+	   	return chatRoomHolder;
 	}
 	
 	// Returns a HBox with a text field and a send button
@@ -132,6 +146,10 @@ public class ChatView extends View<ChatModel> {
 		settings.setText(trans.getString("program.menu.settings"));
 		logout.setText(trans.getString("program.menu.logout"));
 		setIP.setText(trans.getString("program.menu.setIP"));
+		joinChatroom.setText(trans.getString("program.chat.joinChatroom"));
+		leaveChatroom.setText(trans.getString("program.chat.sendleaveChatroom"));
+		createChatroom.setText(trans.getString("program.chat.createChatroom"));
+		deleteChatroom.setText(trans.getString("program.chat.deleteChatroom"));	
 	}
 	
 	private MenuBar createMenuBar() {

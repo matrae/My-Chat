@@ -1,0 +1,32 @@
+
+.button {
+-fx-background-color: 
+        #090a0c;
+-fx-background-radius: 5,4,3,5;
+-fx-background-insets: 0,1,2,0;
+-fx-text-fill: white;
+-fx-font-family: "Arial";
+-fx-text-fill: linear-gradient(white, #d0d0d0);
+-fx-font-size: 15px;
+-fx-padding: 10 20 10 20;
+}
+
+.label {
+-fx-font-family: "Arial";
+-fx-font-size: 15px;
+-fx-text-fill: #090a0c;
+}
+
+.text-field {
+    -fx-font-family: "Arial";
+    -fx-font-size: 15px;
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+.list-cell {
+    -fx-font-family: "Arial";
+    -fx-font-size: 15px;
+}
+
+
