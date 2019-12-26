@@ -5,6 +5,7 @@ import java.io.IOException;
 import App.ChatApp;
 import abstractClasses.Controller;
 import abstractClasses.View;
+import chatClasses.ChatModel;
 import javafx.concurrent.Worker;
 
 public class LoginController extends Controller<LoginModel, LoginView>{
@@ -32,10 +33,9 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 			}
      	});
       	
-   
+
       	
-      	
-      	
+     
       	// Creates the popup window where you can create an account
       	view.getCreateAccButton().setOnAction(event -> {
       		view.createAccountPopup();

@@ -1,15 +1,21 @@
 package chatClasses;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import App.ServiceLocator;
 import abstractClasses.View;
 import commonClasses.Translator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -36,6 +42,9 @@ public class ChatView extends View<ChatModel> {
 	private Menu settings;
 	private MenuItem logout;
 	private MenuItem setIP;
+	
+	// Chatrooms
+	private ListView<String> lvChatRooms;
 	
 	public ChatView(Stage stage, ChatModel model) {
 		super(stage, model);
@@ -76,10 +85,24 @@ public class ChatView extends View<ChatModel> {
 		return null;
 	}
 	
-	// Display all Chatrooms on the Server 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Delete button and chagne
-	private Button createChatrooms() {
-		btnSend = new Button();
-		return btnSend;
+	// private ObservableList<String> obsLChatRooms;
+	private VBox chatRoomHolder;
+	
+	// Display all Chatrooms on the Server 
+	private VBox createChatrooms() {
+		//display the Chatrooms from the server
+		chatRoomHolder = new VBox();
+		
+		//We could use an observable list
+		//obsLChatRooms = FXCollections.observableArrayList();
+		
+		//Create a list view
+		lvChatRooms = new ListView();
+		
+		chatRoomHolder.getChildren().add(lvChatRooms);
+	    
+		return chatRoomHolder;
+		
 	}
 	
 	// Returns a HBox with a text field and a send button
@@ -133,6 +156,15 @@ public class ChatView extends View<ChatModel> {
 		menu.getMenus().addAll(languageMenu, helpMenu, settings);
 		        
 		return menu;
+	}
+
+	public void createCahtroomListView() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public ListView<String> getChatRoomList() {
+		return lvChatRooms;
 	}
 
 }

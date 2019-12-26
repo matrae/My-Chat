@@ -7,6 +7,7 @@ import java.net.Socket;
 import App.ChatApp;
 import App.ServiceLocator;
 import abstractClasses.Model;
+import chatClasses.ChatModel;
 
 public class LoginModel extends Model {
     ServiceLocator serviceLocator = ServiceLocator.getServiceLocator();
@@ -32,12 +33,10 @@ public class LoginModel extends Model {
 	
 	public void validateLogin(ChatApp main) {
 		if (serviceLocator.getConfiguration().getToken() != null) {
-        	//start app view
+			//start app view
 			main.startApp();
 			passwordState = false;
 		} else {
-			//Add error message
-			//changeState(passwordState);
 			passwordState = true;
 		}
 	}

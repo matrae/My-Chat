@@ -12,11 +12,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
 import App.ServiceLocator;
+import javafx.collections.ObservableList;
 
 
 /**
@@ -90,18 +93,31 @@ public class Configuration {
 		}
 	}
     
+    private ArrayList<String> chatRoomAL;
+    
     //Methods which saves the messages in an Array so that we can read the messages
-    public void saveServerMessages(String serverInput) {
+    private void saveServerMessages(String serverInput) {
     	String[] msgArray = serverInput.split("\\|");
     	
     	if (msgArray[0].equals("Result") && msgArray[1].equals("true") && msgArray.length == 3)  {
     		//Find out if its a login information
     		token = msgArray[2];    		
     	} else if (msgArray[0].equals("Result") && msgArray[1].equals("true") && msgArray.length != 3) {
-    		//all other messages
-    		
+    		//Split into different with. split
+    		String[] chatRooms = serverInput.split("\\|");
+    		//Add to arrayList (remeber first 3 are not chatrooms "true" etc.)
+    		chatRoomAL = new ArrayList<>();
+    		for (int i = 2; i < chatRooms.length; i++) { 
+    			chatRoomAL.add(chatRooms[i]);	
+    		} 
     	}
     }
+    
+    public ArrayList<String> getChatRooms() {
+    	return chatRoomAL;
+    }
+    
+    
 
     
     public Configuration() {

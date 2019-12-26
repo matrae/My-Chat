@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 import App.ServiceLocator;
 import abstractClasses.Model;
+import javafx.collections.ObservableList;
 
 public class ChatModel extends Model {
+	
 	ServiceLocator serviceLocator = ServiceLocator.getServiceLocator();
 	private Socket socket = serviceLocator.getConfiguration().getSocket();
 	
-	public void getChatrooms() {		
+	public void loadChatrooms() {		
 		// Server message to get chatrooms
 		String getChatrooms = "ListChatrooms" + "|" + serviceLocator.getConfiguration().getToken();
 		
