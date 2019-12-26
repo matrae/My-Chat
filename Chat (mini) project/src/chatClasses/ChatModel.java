@@ -29,4 +29,21 @@ public class ChatModel extends Model {
 			e.printStackTrace();
 		} 
 	}
+
+	public void joinChatroom(String selectedItem, String user) throws IOException {
+		
+		OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
+		
+		String joinChatroom = "JoinChatroom" + "|" + selectedItem + "|" + user;
+		
+		  try {
+			socketOut.write(joinChatroom + "\n");
+			 socketOut.flush();
+			 serviceLocator.getLogger().info("Sent: " + joinChatroom);
+	         serviceLocator.getConfiguration().communicateServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
+	}
 }

@@ -14,6 +14,8 @@ public class LoginModel extends Model {
     private Socket socket = serviceLocator.getConfiguration().getSocket();
     
     private boolean passwordState = false;
+    private String user;
+    private String unvalidatedUser;
 	
 	public void login(String username, String password) throws IOException {
 		
@@ -24,6 +26,7 @@ public class LoginModel extends Model {
         try {
             socketOut.write(login + "\n");
             socketOut.flush();
+            unvalidatedUser = username;
             serviceLocator.getLogger().info("Sent: " + login);
             serviceLocator.getConfiguration().communicateServer();
         } catch (IOException e) {
@@ -35,10 +38,15 @@ public class LoginModel extends Model {
 		if (serviceLocator.getConfiguration().getToken() != null) {
 			//start app view
 			main.startApp();
+			user = unvalidatedUser;
 			passwordState = false;
 		} else {
 			passwordState = true;
 		}
+	}
+	
+	public String getUsername() {
+		return user;
 	}
 	
 	public boolean getState() {
