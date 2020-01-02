@@ -9,7 +9,7 @@ import chatClasses.ChatModel;
 import javafx.concurrent.Worker;
 
 public class LoginController extends Controller<LoginModel, LoginView>{
-		
+	
 	@SuppressWarnings("unused")
 	public LoginController(final ChatApp main, LoginModel model, LoginView view) {
 		super(model, view);

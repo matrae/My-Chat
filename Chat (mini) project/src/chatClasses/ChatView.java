@@ -187,8 +187,7 @@ public class ChatView extends View<ChatModel> {
 	}
 
 	public Button getJoinChatroom() {
-		// TODO Auto-generated method stub
-		return null;
+		return joinChatroom;
 	}
 
 	public Button getLeaveChatroom() {

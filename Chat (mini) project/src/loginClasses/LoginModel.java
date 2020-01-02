@@ -14,14 +14,15 @@ public class LoginModel extends Model {
     private Socket socket = serviceLocator.getConfiguration().getSocket();
     
     private boolean passwordState = false;
-    private String user;
-    private String unvalidatedUser;
+    private String user = null;
+    private String unvalidatedUser = null;
 	
 	public void login(String username, String password) throws IOException {
 		
 		OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
 		//Message
 		String login = "Login" + "|" + username + "|" + password;
+		unvalidatedUser = username;
 		
         try {
             socketOut.write(login + "\n");
@@ -39,14 +40,13 @@ public class LoginModel extends Model {
 			//start app view
 			main.startApp();
 			user = unvalidatedUser;
+			serviceLocator.getServiceLocator().getConfiguration().setValidatedUser(user);
+			user = null;
+			unvalidatedUser = null;
 			passwordState = false;
 		} else {
 			passwordState = true;
 		}
-	}
-	
-	public String getUsername() {
-		return user;
 	}
 	
 	public boolean getState() {

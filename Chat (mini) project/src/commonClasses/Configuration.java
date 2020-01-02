@@ -41,6 +41,7 @@ public class Configuration {
     private Properties defaultOptions;
     private Properties localOptions;
     private String token = null;
+    private String validatedUser = null;
     
     // Server information
     String ipAddress = "147.86.8.31";
@@ -94,6 +95,7 @@ public class Configuration {
 	}
     
     private ArrayList<String> chatRoomAL;
+    private String user;
     
     //Methods which saves the messages in an Array so that we can read the messages
     private void saveServerMessages(String serverInput) {
@@ -101,7 +103,7 @@ public class Configuration {
     	
     	if (msgArray[0].equals("Result") && msgArray[1].equals("true") && msgArray.length == 3)  {
     		//Find out if its a login information
-    		token = msgArray[2];    		
+    		token = msgArray[2];
     	} else if (msgArray[0].equals("Result") && msgArray[1].equals("true") && msgArray.length != 3) {
     		//Split into different with. split
     		String[] chatRooms = serverInput.split("\\|");
@@ -116,7 +118,7 @@ public class Configuration {
     public ArrayList<String> getChatRooms() {
     	return chatRoomAL;
     }
-    
+   
     
 
     
@@ -186,7 +188,14 @@ public class Configuration {
     public void setLocalOption(String name, String value) {
         localOptions.setProperty(name, value);
     }
-
+    
+    public void setValidatedUser(String user) {
+    	this.validatedUser = user;
+    }
+    
+    public String getValidatedUser() {
+    	return validatedUser;
+    }
 
 	public Socket getSocket() {
 		// TODO Auto-generated method stub

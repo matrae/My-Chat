@@ -16,11 +16,11 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 	
 	public ChatController(ChatModel model, ChatView view) {
 		super(model, view);
-		// TODO Auto-generated constructor stub
 		
 		// First of all load all chatrooms, so that they can be displayed
 		model.loadChatrooms();
 		view.createCahtroomListView();
+		
 		try {
 			Thread.sleep(100);
 			getChatrooms();
@@ -28,11 +28,17 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		/*
+	
 		view.getJoinChatroom().setOnAction(e -> {
+			try {
+				model.joinChatroom(view.getChatRoomList().getSelectionModel().getSelectedItem(), serviceL.getConfiguration().getValidatedUser());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});
 		
+		/*
 		view.getLeaveChatroom().setOnAction(e -> {
 			
 		});
