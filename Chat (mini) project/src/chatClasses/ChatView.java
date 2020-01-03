@@ -191,18 +191,15 @@ public class ChatView extends View<ChatModel> {
 	}
 
 	public Button getLeaveChatroom() {
-		// TODO Auto-generated method stub
-		return null;
+		return leaveChatroom;
 	}
 
 	public Button getCreateChatroom() {
-		// TODO Auto-generated method stub
-		return null;
+		return createChatroom;
 	}
 
 	public Button getDeleteChatroom() {
-		// TODO Auto-generated method stub
-		return null;
+		return deleteChatroom;
 	}
 
 }

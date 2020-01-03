@@ -30,14 +30,12 @@ public class ChatModel extends Model {
 		} 
 	}
 
-	public void joinChatroom(String selectedItem, String user) throws IOException {
-		
-		OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
-		
-		String joinChatroom = "JoinChatroom" + "|" + selectedItem + "|" + user;
+	public void joinChatroom(String selectedItem, String token, String user) throws IOException {
+		String joinChatroom = "JoinChatroom" + "|" + token + "|" + selectedItem + "|" + user;
 		
 		  try {
-			socketOut.write(joinChatroom + "\n");
+			 OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
+			 socketOut.write(joinChatroom + "\n");
 			 socketOut.flush();
 			 serviceLocator.getLogger().info("Sent: " + joinChatroom);
 	         serviceLocator.getConfiguration().communicateServer();
@@ -45,5 +43,50 @@ public class ChatModel extends Model {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}			
+	}
+	
+	public void leaveChatroom(String token, String chatroom, String user) {
+		String leaveChatroom = "LeaveChatroom" + "|" + token + "|" + chatroom + "|" + user;
+		
+		  try {
+			 OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
+			 socketOut.write(leaveChatroom + "\n");
+			 socketOut.flush();
+			 serviceLocator.getLogger().info("Sent: " + leaveChatroom);
+	         serviceLocator.getConfiguration().communicateServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void createChatroom(String token, String chatRoomName) {
+		String createChatroom = "CreateChatroom" + "|" + token + "|" + chatRoomName + "|" + "true";
+		
+		  try {
+			 OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
+			 socketOut.write(createChatroom + "\n");
+			 socketOut.flush();
+			 serviceLocator.getLogger().info("Sent: " + createChatroom);
+	         serviceLocator.getConfiguration().communicateServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteChatroom(String token, String chatRoom) {
+		String deleteChatroom = "DeleteChatroom" + "|" + token + "|" + chatRoom;
+		
+		  try {
+			 OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
+			 socketOut.write(deleteChatroom + "\n");
+			 socketOut.flush();
+			 serviceLocator.getLogger().info("Sent: " + deleteChatroom);
+	         serviceLocator.getConfiguration().communicateServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -31,7 +31,7 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 	
 		view.getJoinChatroom().setOnAction(e -> {
 			try {
-				model.joinChatroom(view.getChatRoomList().getSelectionModel().getSelectedItem(), serviceL.getConfiguration().getValidatedUser());
+				model.joinChatroom(view.getChatRoomList().getSelectionModel().getSelectedItem(), serviceL.getConfiguration().getToken(), serviceL.getConfiguration().getValidatedUser());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -40,18 +40,20 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		
 		/*
 		view.getLeaveChatroom().setOnAction(e -> {
-			
+			model.leaveChatroom(serviceL.getConfiguration().getToken(), chatroom, user);
 		});
-		
-		view.getCreateChatroom().setOnAction(e -> {
-			
-		});
-		
-		view.getDeleteChatroom().setOnAction(e -> {
-			
-		});
-		
 		*/
+		
+		// Somehow update chatrooms after
+		view.getCreateChatroom().setOnAction(e -> {
+			model.createChatroom(serviceL.getConfiguration().getToken(), "MattiaTest");
+		});
+		/*
+		view.getDeleteChatroom().setOnAction(e -> {
+			model.deleteChatroom(serviceL.getConfiguration().getToken(), chatRoom);
+		});
+		*/
+
 	}
 	
 	
