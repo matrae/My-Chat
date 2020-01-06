@@ -29,6 +29,26 @@ public class ChatModel extends Model {
 			e.printStackTrace();
 		} 
 	}
+	
+	private class PeriodicallyGetChatrooms extends Thread {
+		
+		private PeriodicallyGetChatrooms() {
+			this.setDaemon(true);
+			this.start();
+		}
+		
+		public void run() {
+			while(true) {
+				try {
+					Thread.sleep(10000);
+					loadChatrooms();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 	public void joinChatroom(String selectedItem, String token, String user) throws IOException {
 		String joinChatroom = "JoinChatroom" + "|" + token + "|" + selectedItem + "|" + user;

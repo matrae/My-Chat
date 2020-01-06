@@ -46,7 +46,6 @@ public class ChatView extends View<ChatModel> {
 	
 	// Chatrooms
 	private ListView<String> lvChatRooms;
-	// private ObservableList<String> obsLChatRooms;
 	private VBox chatRoomHolder;
 	private Button joinChatroom;
 	private Button leaveChatroom;
@@ -60,9 +59,7 @@ public class ChatView extends View<ChatModel> {
 
 	@Override
 	protected Scene create_GUI() {
-		
 		ServiceLocator serviceL = ServiceLocator.getServiceLocator();
-		
 		
 		VBox basis = new VBox();
 		HBox roomsChat = new HBox();
@@ -109,6 +106,7 @@ public class ChatView extends View<ChatModel> {
 		//obsLChatRooms = FXCollections.observableArrayList()
 		//Create a list view
 		lvChatRooms = new ListView();
+		lvChatRooms.setPrefHeight(800);
 		
 		HBox roomButtons = new HBox();
 		roomButtons.setPadding(new Insets(10,10,10,10));
@@ -182,7 +180,7 @@ public class ChatView extends View<ChatModel> {
 		
 	}
 	
-	public ListView<String> getChatRoomList() {
+	public ListView<String> getChatRoomListview() {
 		return lvChatRooms;
 	}
 
@@ -201,5 +199,4 @@ public class ChatView extends View<ChatModel> {
 	public Button getDeleteChatroom() {
 		return deleteChatroom;
 	}
-
 }

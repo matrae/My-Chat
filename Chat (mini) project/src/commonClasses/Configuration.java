@@ -19,6 +19,7 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 import App.ServiceLocator;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
@@ -94,7 +95,7 @@ public class Configuration {
 		}
 	}
     
-    private ArrayList<String> chatRoomAL;
+    private ObservableList<String> chatRoomAL = FXCollections.observableArrayList();
     private String user;
     
     //Methods which saves the messages in an Array so that we can read the messages
@@ -108,14 +109,15 @@ public class Configuration {
     		//Split into different with. split
     		String[] chatRooms = serverInput.split("\\|");
     		//Add to arrayList (remeber first 3 are not chatrooms "true" etc.)
-    		chatRoomAL = new ArrayList<>();
     		for (int i = 2; i < chatRooms.length; i++) { 
+    			if (!chatRoomAL.contains(chatRooms[i])) {
     			chatRoomAL.add(chatRooms[i]);	
+    			}
     		} 
     	}
     }
     
-    public ArrayList<String> getChatRooms() {
+    public ObservableList<String> getChatRooms() {
     	return chatRoomAL;
     }
    
