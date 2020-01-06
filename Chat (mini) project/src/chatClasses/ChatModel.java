@@ -54,6 +54,8 @@ public class ChatModel extends Model {
 			 socketOut.flush();
 			 serviceLocator.getLogger().info("Sent: " + joinChatroom);
 	         serviceLocator.getConfiguration().communicateServer();
+	         serviceLocator.getConfiguration().welcomeMessage();
+	         
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

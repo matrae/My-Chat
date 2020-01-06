@@ -23,6 +23,7 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		super(model, view);
 		
 		//Loads the chatrooms and updates every 50 seconds
+		displayChatrooms();
 		Thread t = new PeriodicChecker();
 	    t.setDaemon(true);
 		t.start();
