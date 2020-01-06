@@ -48,6 +48,11 @@ public class Configuration {
     String ipAddress = "147.86.8.31";
     int portNumber = 50001;
     private Socket socket = null;
+    
+    private ObservableList<String> chatRoomAL = FXCollections.observableArrayList();
+    private ObservableList<String> chatMessagesOL = FXCollections.observableArrayList();
+    private String user;
+    private String joinedChatroom;
 
     
     //Establish SERVER CONNECTOIN
@@ -94,10 +99,7 @@ public class Configuration {
             e.printStackTrace();
 		}
 	}
-    
-    private ObservableList<String> chatRoomAL = FXCollections.observableArrayList();
-    private String user;
-    
+        
     //Methods which saves the messages in an Array so that we can read the messages
     private void saveServerMessages(String serverInput) {
     	String[] msgArray = serverInput.split("\\|");
@@ -115,13 +117,28 @@ public class Configuration {
     			}
     		} 
     	}
+    	
+    	if (msgArray[0].equals("MessageText")  && msgArray.length == 4 && msgArray[2].equals(joinedChatroom)) {
+    		String user = msgArray[1];
+    		String message = msgArray[3];
+    		
+    		// Create message and add it to the observable list
+    		String messageString = user + ":  " + message;
+    		chatMessagesOL.add(messageString);
+    	}
     }
     
     public ObservableList<String> getChatRooms() {
     	return chatRoomAL;
     }
    
+    public ObservableList<String> getChatMessages() {
+    	return chatMessagesOL;
+    }
     
+    public void clearChatMessagesOL() {
+    	chatMessagesOL.clear();
+    }
 
     
     public Configuration() {
@@ -198,6 +215,14 @@ public class Configuration {
     public String getValidatedUser() {
     	return validatedUser;
     }
+    
+    public String getJoinedChatroom() {
+    	return joinedChatroom;
+    }
+    
+    public void setJoinedChatroom(String name) {
+    	joinedChatroom = name;
+    }
 
 	public Socket getSocket() {
 		// TODO Auto-generated method stub
@@ -208,5 +233,10 @@ public class Configuration {
 	public String getToken() {
 		// TODO Auto-generated method stub
 		return token;
+	}
+
+	public String getChatroom() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

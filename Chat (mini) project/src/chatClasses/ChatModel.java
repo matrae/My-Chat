@@ -15,6 +15,20 @@ public class ChatModel extends Model {
 	ServiceLocator serviceLocator = ServiceLocator.getServiceLocator();
 	private Socket socket = serviceLocator.getConfiguration().getSocket();
 	
+	public void sendMessage(String chatroom, String message) {
+		String sendMessage = "SendMessage" + "|" + serviceLocator.getConfiguration().getToken() + "|" + chatroom + "|" + message;
+		
+		try {
+			OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
+			socketOut.write(sendMessage + "\n");
+			socketOut.flush();
+			serviceLocator.getLogger().info("Sent: " + sendMessage);
+			serviceLocator.getConfiguration().communicateServer();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
 	public void loadChatrooms() {		
 		// Server message to get chatrooms
 		String getChatrooms = "ListChatrooms" + "|" + serviceLocator.getConfiguration().getToken();
@@ -32,7 +46,8 @@ public class ChatModel extends Model {
 	
 	public void joinChatroom(String selectedItem, String token, String user) throws IOException {
 		String joinChatroom = "JoinChatroom" + "|" + token + "|" + selectedItem + "|" + user;
-		
+		serviceLocator.getConfiguration().clearChatMessagesOL();
+		serviceLocator.getConfiguration().setJoinedChatroom(selectedItem);
 		  try {
 			 OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
 			 socketOut.write(joinChatroom + "\n");

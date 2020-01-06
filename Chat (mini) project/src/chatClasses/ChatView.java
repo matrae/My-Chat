@@ -157,6 +157,7 @@ public class ChatView extends View<ChatModel> {
 		createPopupChatroom.initModality(Modality.APPLICATION_MODAL);
 		
 		VBox popupChatroom = new VBox();
+		popupChatroom.setSpacing(20);
 		popupChatroom.setId("CreateChatroom");
 		
 		createPopupChatroom.setResizable(false);
@@ -170,7 +171,6 @@ public class ChatView extends View<ChatModel> {
         defCreateChatroom = new Button();
         
         infoCreateChatroom.setWrapText(true);
-        infoCreateChatroom.setMinHeight(90);
         
         popupChatroom.getChildren().addAll(infoCreateChatroom, txtChatroomName, defCreateChatroom);
 		
@@ -259,14 +259,23 @@ public class ChatView extends View<ChatModel> {
 		return menu;
 	}
 
-	public void createCahtroomListView() {
-		// TODO Auto-generated method stub
-		
+	public Button getbtnSend() {
+		return btnSend;
+	}
+	
+	public String getTxtMessage() {
+		String message = txtMessage.getText();
+	    return message;
 	}
 	
 	public ListView<String> getChatRoomListview() {
 		return lvChatRooms;
 	}
+	
+	public ListView<String> getMessagesListview() {
+		return lvMessages;
+	}
+
 
 	public Button getJoinChatroom() {
 		return joinChatroom;

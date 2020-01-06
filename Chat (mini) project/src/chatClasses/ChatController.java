@@ -26,23 +26,17 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		Thread t = new PeriodicChecker();
 	    t.setDaemon(true);
 		t.start();
+		displayChatroomMessages();
 		
 		view.getJoinChatroom().setOnAction(e -> {
 			try {
 				model.joinChatroom(view.getChatRoomListview().getSelectionModel().getSelectedItem(), serviceL.getConfiguration().getToken(), serviceL.getConfiguration().getValidatedUser());
-			} catch (IOException e1) {
+				} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
-		
-		/*
-		view.getLeaveChatroom().setOnAction(e -> {
-			model.leaveChatroom(serviceL.getConfiguration().getToken(), chatroom, user);
-		});
-		*/
-		
-		// Somehow update chatrooms after
+				
 		view.getCreateChatroom().setOnAction(e -> {
 			view.createChatroomPopup();
 			view.getdefCreateChatroom().setOnAction(a -> {
@@ -51,12 +45,15 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 			displayChatrooms();
 			});	
 		});
-		/*
+		
 		view.getDeleteChatroom().setOnAction(e -> {
-			model.deleteChatroom(serviceL.getConfiguration().getToken(), chatRoom);
+			model.deleteChatroom(serviceL.getConfiguration().getToken(), view.getChatRoomListview().getSelectionModel().getSelectedItem());
+			displayChatrooms();
 		});
-		*/
-
+		
+		view.getbtnSend().setOnAction(e -> {
+			model.sendMessage(serviceL.getConfiguration().getJoinedChatroom(), view.getTxtMessage());
+		});
 	}
 	
 	public class PeriodicChecker extends Thread
@@ -98,6 +95,32 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 							for (String a : serviceL.getConfiguration().getChatRooms()) {
 								if(!view.getChatRoomListview().getItems().contains(a)) {
 									view.getChatRoomListview().getItems().add(a);
+								}								
+							}
+						}
+						
+					});
+				}
+			}
+			
+		});
+	}
+	
+	private void displayChatroomMessages() {
+		serviceL.getConfiguration().getChatMessages().addListener(new ListChangeListener<String>() {
+
+			@Override
+			public void onChanged(Change<? extends String> arg0) {
+				// TODO Auto-generated method stub
+				while(arg0.next()) {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							view.getMessagesListview().getItems().clear();
+							for (String a : serviceL.getConfiguration().getChatMessages()) {
+								if(!view.getMessagesListview().getItems().contains(a)) {
+									view.getMessagesListview().getItems().add(a);
 								}								
 							}
 						}
