@@ -29,6 +29,11 @@
     -fx-font-size: 15px;
 }
 
+.list-view {
+-fx-background-color: #a9a9a9;
+-fx-text-fill: white;
+}
+
 #SendButton {
  -fx-background-color: Transparent;
 }

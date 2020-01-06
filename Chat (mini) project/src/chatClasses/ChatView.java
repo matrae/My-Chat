@@ -38,6 +38,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Box;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ChatView extends View<ChatModel> {
@@ -59,6 +60,12 @@ public class ChatView extends View<ChatModel> {
 	private Button joinChatroom;
 	private Button createChatroom;
 	private Button deleteChatroom;
+	
+	// Popup Chatroom creation
+	private Stage createPopupChatroom;
+	private Button defCreateChatroom;
+	private Label infoCreateChatroom;
+	private TextField txtChatroomName;
 	
 	// Chat window for messages
 	private ListView<String> lvMessages;
@@ -142,6 +149,50 @@ public class ChatView extends View<ChatModel> {
 	   	return chatRoomHolder;
 	}
 	
+	// When creating a new chatroom
+	public void createChatroomPopup() {
+		// TODO Auto-generated method stub
+
+		createPopupChatroom = new Stage();
+		createPopupChatroom.initModality(Modality.APPLICATION_MODAL);
+		
+		VBox popupChatroom = new VBox();
+		popupChatroom.setId("CreateChatroom");
+		
+		createPopupChatroom.setResizable(false);
+		createPopupChatroom.setHeight(250);
+		createPopupChatroom.setWidth(250);
+        popupChatroom.setPadding(new Insets(10,10,10,10));
+        popupChatroom.setAlignment(Pos.CENTER);
+		
+        infoCreateChatroom	= new Label();
+        txtChatroomName = new TextField();
+        defCreateChatroom = new Button();
+        
+        infoCreateChatroom.setWrapText(true);
+        infoCreateChatroom.setMinHeight(90);
+        
+        popupChatroom.getChildren().addAll(infoCreateChatroom, txtChatroomName, defCreateChatroom);
+		
+		//Update the labels
+		updateCreateChatroom();
+		
+		Scene popupChatroomScene = new Scene(popupChatroom);
+		popupChatroom.getStylesheets().addAll(this.getClass().getResource("chat.css").toExternalForm());
+		createPopupChatroom.setScene(popupChatroomScene);
+		createPopupChatroom.show();
+		
+	}
+	
+	private void updateCreateChatroom() {
+		// TODO Auto-generated method stub
+		Translator trans = ServiceLocator.getServiceLocator().getTranslator();
+		
+		//Reference to file
+		infoCreateChatroom.setText(trans.getString("program.chat.infoCreateChatroom"));
+		defCreateChatroom.setText(trans.getString("program.chat.createChatroom"));
+	}
+
 	// Returns a HBox with a text field and a send button
 	private HBox createMessSend() {
 		
@@ -227,5 +278,18 @@ public class ChatView extends View<ChatModel> {
 
 	public Button getDeleteChatroom() {
 		return deleteChatroom;
+	}
+	
+	public Button getdefCreateChatroom() {
+		return defCreateChatroom;
+	}
+	
+	public Stage getCreateChatroomPopupStage() {
+		return createPopupChatroom;
+	}
+
+	public String getChatroomName() {
+		String chatroom = txtChatroomName.getText();
+	    return chatroom;
 	}
 }

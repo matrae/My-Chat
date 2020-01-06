@@ -22,6 +22,7 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 	public ChatController(ChatModel model, ChatView view) {
 		super(model, view);
 		
+		//Loads the chatrooms and updates every 50 seconds
 		Thread t = new PeriodicChecker();
 	    t.setDaemon(true);
 		t.start();
@@ -43,8 +44,12 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		
 		// Somehow update chatrooms after
 		view.getCreateChatroom().setOnAction(e -> {
-			model.createChatroom(serviceL.getConfiguration().getToken(), "3333333333333333333");
+			view.createChatroomPopup();
+			view.getdefCreateChatroom().setOnAction(a -> {
+			model.createChatroom(serviceL.getConfiguration().getToken(), view.getChatroomName());
+			view.getCreateChatroomPopupStage().close();
 			displayChatrooms();
+			});	
 		});
 		/*
 		view.getDeleteChatroom().setOnAction(e -> {
