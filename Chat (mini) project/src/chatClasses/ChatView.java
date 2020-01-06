@@ -1,9 +1,15 @@
 package chatClasses;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
 import App.ServiceLocator;
 import abstractClasses.View;
@@ -23,12 +29,15 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 
 public class ChatView extends View<ChatModel> {
@@ -44,13 +53,16 @@ public class ChatView extends View<ChatModel> {
 	private MenuItem logout;
 	private MenuItem setIP;
 	
-	// Chatrooms
+	// Chatroom List
 	private ListView<String> lvChatRooms;
 	private VBox chatRoomHolder;
 	private Button joinChatroom;
-	private Button leaveChatroom;
 	private Button createChatroom;
 	private Button deleteChatroom;
+	
+	// Chat window for messages
+	private ListView<String> lvMessages;
+	private VBox messageHolder;
 	
 	public ChatView(Stage stage, ChatModel model) {
 		super(stage, model);
@@ -62,8 +74,13 @@ public class ChatView extends View<ChatModel> {
 		ServiceLocator serviceL = ServiceLocator.getServiceLocator();
 		
 		VBox basis = new VBox();
+		VBox messText = new VBox();
 		HBox roomsChat = new HBox();
-		roomsChat.getChildren().addAll(createChatrooms(), createMessSend());
+		roomsChat.setPrefWidth(400);
+		messText.setPrefWidth(600);
+		
+		messText.getChildren().addAll(createMessageView(), createMessSend());
+		roomsChat.getChildren().addAll(createChatrooms(), messText);
 		basis.getChildren().addAll(createMenuBar(), roomsChat);
 		
 	
@@ -79,15 +96,22 @@ public class ChatView extends View<ChatModel> {
             	updateText();
             });
         }
-		scene = new Scene(basis, 1300, 800);
+		scene = new Scene(basis, 1000, 800);
 		scene.getStylesheets().addAll(this.getClass().getResource("chat.css").toExternalForm());
 		updateText();
 		return scene;
 	}
 	
 	// Display the Messages in a List maybe
-	private HBox createMessageView() {
-		return null;
+	private VBox createMessageView() {
+		
+		lvMessages = new ListView();
+		lvMessages.setPrefHeight(800);
+		messageHolder = new VBox();
+		messageHolder.setPadding(new Insets(10,10,10,10));
+		messageHolder.getChildren().addAll(lvMessages);
+		
+		return messageHolder;
 	}
 	
 
@@ -97,7 +121,6 @@ public class ChatView extends View<ChatModel> {
 		//display the Chatrooms from the server
 		
 		joinChatroom = new Button();
-		leaveChatroom = new Button();
 		createChatroom = new Button();
 		deleteChatroom = new Button();
 		
@@ -112,32 +135,43 @@ public class ChatView extends View<ChatModel> {
 		roomButtons.setPadding(new Insets(10,10,10,10));
 		roomButtons.setSpacing(20);
 		
-		roomButtons.getChildren().addAll(joinChatroom,leaveChatroom,createChatroom,deleteChatroom);
+		roomButtons.getChildren().addAll(joinChatroom,createChatroom,deleteChatroom);
 	
 		chatRoomHolder.getChildren().addAll(roomButtons, lvChatRooms);
+		chatRoomHolder.setPrefWidth(400);
 	   	return chatRoomHolder;
 	}
 	
 	// Returns a HBox with a text field and a send button
 	private HBox createMessSend() {
+		
+		//Create Image for Send button
+		ImageView icon = new ImageView();
+		Image image = new Image("/chatClasses/send.png");
+		icon.setImage(image);
+		icon.setFitWidth(50);
+		icon.setFitHeight(50);
+		
 		// Create buttons, and textfields
-		btnSend = new Button();
+		btnSend = new Button("",icon);
+		btnSend.setId("SendButton");
 		txtMessage = new TextArea();
 		
 		//BOTTOM: Textfield and messages
 		HBox messSend = new HBox();
-		messSend.getChildren().addAll(txtMessage, btnSend);		
+		
+		messSend.setPadding(new Insets(10,10,10,10));
+		messSend.getChildren().addAll(txtMessage, btnSend);
 		
 		return messSend;
 	}	
 
 	private void updateText() {
-		// ehm okey -> need to understand before exam
 		Translator trans = ServiceLocator.getServiceLocator().getTranslator();
 		
 		//Set reference to Trnaslation
 		//LoginScreen
-		btnSend.setText(trans.getString("program.chat.send"));
+		//tnSend.setText(trans.getString("program.chat.send"));
 		
 		//Menutext
 		languageMenu.setText(trans.getString("program.menu.file.language"));
@@ -146,7 +180,6 @@ public class ChatView extends View<ChatModel> {
 		logout.setText(trans.getString("program.menu.logout"));
 		setIP.setText(trans.getString("program.menu.setIP"));
 		joinChatroom.setText(trans.getString("program.chat.joinChatroom"));
-		leaveChatroom.setText(trans.getString("program.chat.sendleaveChatroom"));
 		createChatroom.setText(trans.getString("program.chat.createChatroom"));
 		deleteChatroom.setText(trans.getString("program.chat.deleteChatroom"));	
 	}
@@ -186,10 +219,6 @@ public class ChatView extends View<ChatModel> {
 
 	public Button getJoinChatroom() {
 		return joinChatroom;
-	}
-
-	public Button getLeaveChatroom() {
-		return leaveChatroom;
 	}
 
 	public Button getCreateChatroom() {

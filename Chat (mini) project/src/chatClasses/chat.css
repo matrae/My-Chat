@@ -29,4 +29,9 @@
     -fx-font-size: 15px;
 }
 
+#SendButton {
+ -fx-background-color: Transparent;
+}
+
+
 
