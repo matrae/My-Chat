@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import App.ServiceLocator;
 import abstractClasses.Model;
-import javafx.collections.ObservableList;
 
 public class ChatModel extends Model {
 	

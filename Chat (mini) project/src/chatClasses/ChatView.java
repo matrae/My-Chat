@@ -8,7 +8,6 @@ import java.util.Locale;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import App.ServiceLocator;
