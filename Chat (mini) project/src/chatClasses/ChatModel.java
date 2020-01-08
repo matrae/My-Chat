@@ -49,7 +49,6 @@ public class ChatModel extends Model {
 				oos.close();
 				serviceLocator.getLogger().info("File created for " + chatroom);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -64,6 +63,7 @@ public class ChatModel extends Model {
 			// for every item in the list write to OL
 			serviceLocator.getConfiguration().getChatMessages().addAll(list);
 			serviceLocator.getLogger().info("File loaded for " + chatroom);
+			in.close();
 		} catch (IOException e) {
 			//do nothing
 		} catch (ClassNotFoundException e) {

@@ -30,15 +30,17 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		displayChatroomMessages();
 		
 		view.getJoinChatroom().setOnAction(e -> {
-			try {
-				model.saveChatroom(serviceL.getConfiguration().getChatMessages(), serviceL.getConfiguration().getJoinedChatroom());
-				model.joinChatroom(view.getChatRoomListview().getSelectionModel().getSelectedItem(), serviceL.getConfiguration().getToken(), serviceL.getConfiguration().getValidatedUser());
-				//Create path out of chatmodel
-				Path path = Paths.get(serviceL.getConfiguration().getJoinedChatroom() + ".txt");
-				model.loadChatroom(path);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			if (serviceL.getConfiguration().getJoinedChatroom() != view.getChatRoomListview().getSelectionModel().getSelectedItem()) {
+				try {
+					model.saveChatroom(serviceL.getConfiguration().getChatMessages(), serviceL.getConfiguration().getJoinedChatroom());
+					model.joinChatroom(view.getChatRoomListview().getSelectionModel().getSelectedItem(), serviceL.getConfiguration().getToken(), serviceL.getConfiguration().getValidatedUser());
+					//Create path out of chatmodel
+					Path path = Paths.get(serviceL.getConfiguration().getJoinedChatroom() + ".txt");
+					model.loadChatroom(path);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 				
