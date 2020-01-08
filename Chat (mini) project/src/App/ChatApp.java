@@ -1,4 +1,5 @@
 package App;
+import chatClasses.ChatController;
 import chatClasses.ChatModel;
 import chatClasses.ChatView;
 import javafx.application.Application;

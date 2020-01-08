@@ -3,6 +3,7 @@ package chatClasses;
 import java.io.IOException;
 import java.util.List;
 
+import App.ChatApp;
 import App.ServiceLocator;
 import abstractClasses.Controller;
 import javafx.application.Platform;
@@ -48,7 +49,6 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		
 		view.getDeleteChatroom().setOnAction(e -> {
 			model.deleteChatroom(serviceL.getConfiguration().getToken(), view.getChatRoomListview().getSelectionModel().getSelectedItem());
-			serviceL.getConfiguration().clearChatMessagesOL();
 			displayChatrooms();
 		});
 		

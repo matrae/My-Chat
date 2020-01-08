@@ -46,14 +46,8 @@ public class ChatModel extends Model {
 	
 	public void joinChatroom(String selectedItem, String token, String user) throws IOException {
 		String joinChatroom = "JoinChatroom" + "|" + token + "|" + selectedItem + "|" + user;
-		//method which creates or saves chat to file
-		
 		serviceLocator.getConfiguration().clearChatMessagesOL();
 		serviceLocator.getConfiguration().setJoinedChatroom(selectedItem);
-		
-		//Method which loads the file of the selected item
-		
-		
 		  try {
 			 OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
 			 socketOut.write(joinChatroom + "\n");
@@ -67,8 +61,6 @@ public class ChatModel extends Model {
 			e.printStackTrace();
 		}			
 	}
-	
-
 	
 	public void leaveChatroom(String token, String chatroom, String user) {
 		String leaveChatroom = "LeaveChatroom" + "|" + token + "|" + chatroom + "|" + user;
