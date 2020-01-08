@@ -1,6 +1,8 @@
 package chatClasses;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import App.ServiceLocator;
 import abstractClasses.Controller;
@@ -29,8 +31,12 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		
 		view.getJoinChatroom().setOnAction(e -> {
 			try {
+				model.saveChatroom(serviceL.getConfiguration().getChatMessages(), serviceL.getConfiguration().getJoinedChatroom());
 				model.joinChatroom(view.getChatRoomListview().getSelectionModel().getSelectedItem(), serviceL.getConfiguration().getToken(), serviceL.getConfiguration().getValidatedUser());
-				} catch (IOException e1) {
+				//Create path out of chatmodel
+				Path path = Paths.get(serviceL.getConfiguration().getJoinedChatroom() + ".txt");
+				model.loadChatroom(path);
+			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}

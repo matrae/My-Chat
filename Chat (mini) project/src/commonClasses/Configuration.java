@@ -208,11 +208,7 @@ public class Configuration {
     public String getOption(String name) {
         return localOptions.getProperty(name);
     }
-    
-    public void welcomeMessage() {
-    	chatMessagesOL.add("Server: Welcome! You joined the chatroom " + getJoinedChatroom());
-    }
-    
+        
     public void setLocalOption(String name, String value) {
         localOptions.setProperty(name, value);
     }
