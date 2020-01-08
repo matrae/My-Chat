@@ -120,9 +120,8 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 							// TODO Auto-generated method stub
 							view.getMessagesListview().getItems().clear();
 							for (String a : serviceL.getConfiguration().getChatMessages()) {
-								if(!view.getMessagesListview().getItems().contains(a)) {
 									view.getMessagesListview().getItems().add(a);
-								}								
+						
 							}
 						}
 						

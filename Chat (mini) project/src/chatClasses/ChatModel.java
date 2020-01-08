@@ -96,6 +96,7 @@ public class ChatModel extends Model {
 		String deleteChatroom = "DeleteChatroom" + "|" + token + "|" + chatRoom;
 		
 		  try {
+			 serviceLocator.getConfiguration().clearRooms();
 			 OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
 			 socketOut.write(deleteChatroom + "\n");
 			 socketOut.flush();

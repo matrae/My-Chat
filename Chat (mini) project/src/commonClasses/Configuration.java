@@ -129,7 +129,12 @@ public class Configuration {
     }
     
     public ObservableList<String> getChatRooms() {
-    	return chatRoomAL;
+    	try { 
+    		return chatRoomAL;
+    	} catch (Exception ignore) {
+    		//do nothing
+    	}
+    	return null;
     }
    
     public ObservableList<String> getChatMessages() {
@@ -239,8 +244,7 @@ public class Configuration {
 		return token;
 	}
 
-	public String getChatroom() {
-		// TODO Auto-generated method stub
-		return null;
+	public void clearRooms() {
+		chatRoomAL.clear();		
 	}
 }

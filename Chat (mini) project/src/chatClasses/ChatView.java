@@ -45,7 +45,7 @@ public class ChatView extends View<ChatModel> {
 	
 	// Labels for Chat
 	private Button btnSend;
-	private TextArea txtMessage;
+	private TextField txtMessage;
 	
 	// Menu label
 	private Menu languageMenu;
@@ -200,13 +200,15 @@ public class ChatView extends View<ChatModel> {
 		ImageView icon = new ImageView();
 		Image image = new Image("/chatClasses/send.png");
 		icon.setImage(image);
-		icon.setFitWidth(50);
-		icon.setFitHeight(50);
+		icon.setFitWidth(25);
+		icon.setFitHeight(25);
 		
 		// Create buttons, and textfields
 		btnSend = new Button("",icon);
 		btnSend.setId("SendButton");
-		txtMessage = new TextArea();
+		txtMessage = new TextField();
+		txtMessage.setPrefHeight(40);
+		txtMessage.setPrefWidth(575);
 		
 		//BOTTOM: Textfield and messages
 		HBox messSend = new HBox();
@@ -275,7 +277,6 @@ public class ChatView extends View<ChatModel> {
 	public ListView<String> getMessagesListview() {
 		return lvMessages;
 	}
-
 
 	public Button getJoinChatroom() {
 		return joinChatroom;
