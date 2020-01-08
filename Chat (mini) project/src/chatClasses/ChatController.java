@@ -46,8 +46,15 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		});
 		
 		view.getDeleteChatroom().setOnAction(e -> {
+			
+			if (serviceL.getConfiguration().getJoinedChatroom() != null) {
+				if (serviceL.getConfiguration().getJoinedChatroom().equals(view.getChatRoomListview().getSelectionModel().getSelectedItem())) {
+					model.leaveChatroom(serviceL.getConfiguration().getToken(), view.getChatRoomListview().getSelectionModel().getSelectedItem(), serviceL.getConfiguration().getValidatedUser());
+					serviceL.getConfiguration().clearChatMessagesOL();
+					displayChatrooms();
+				}
+			}
 			model.deleteChatroom(serviceL.getConfiguration().getToken(), view.getChatRoomListview().getSelectionModel().getSelectedItem());
-			serviceL.getConfiguration().clearChatMessagesOL();
 			displayChatrooms();
 		});
 		
@@ -93,9 +100,7 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 							// TODO Auto-generated method stub
 							view.getChatRoomListview().getItems().clear();
 							for (String a : serviceL.getConfiguration().getChatRooms()) {
-								if(!view.getChatRoomListview().getItems().contains(a)) {
-									view.getChatRoomListview().getItems().add(a);
-								}								
+								view.getChatRoomListview().getItems().add(a);						
 							}
 						}
 						

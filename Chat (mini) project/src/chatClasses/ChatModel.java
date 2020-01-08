@@ -61,6 +61,7 @@ public class ChatModel extends Model {
 		}			
 	}
 	
+	//Not used yet
 	public void leaveChatroom(String token, String chatroom, String user) {
 		String leaveChatroom = "LeaveChatroom" + "|" + token + "|" + chatroom + "|" + user;
 		
