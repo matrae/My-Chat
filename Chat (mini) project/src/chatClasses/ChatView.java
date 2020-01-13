@@ -51,7 +51,7 @@ public class ChatView extends View<ChatModel> {
 	private Menu helpMenu;
 	private Menu settings;
 	private MenuItem logout;
-	private MenuItem setIP;
+	private MenuItem deleteAcc;
 	
 	// Chatroom List
 	private ListView<String> lvChatRooms;
@@ -230,7 +230,7 @@ public class ChatView extends View<ChatModel> {
 		helpMenu.setText(trans.getString("program.menu.help"));
 		settings.setText(trans.getString("program.menu.settings"));
 		logout.setText(trans.getString("program.menu.logout"));
-		setIP.setText(trans.getString("program.menu.setIP"));
+		deleteAcc.setText(trans.getString("program.menu.delete"));
 		joinChatroom.setText(trans.getString("program.chat.joinChatroom"));
 		createChatroom.setText(trans.getString("program.chat.createChatroom"));
 		deleteChatroom.setText(trans.getString("program.chat.deleteChatroom"));	
@@ -249,10 +249,10 @@ public class ChatView extends View<ChatModel> {
 		
         // Create MenuItems
 		logout = new MenuItem();
-        setIP = new MenuItem();
+        deleteAcc = new MenuItem();
         
         // Add menuItems to the Menus
-        settings.getItems().addAll(setIP, logout);
+        settings.getItems().addAll(deleteAcc, logout);
 		        
 		//Add menus to menubar
 		menu.getMenus().addAll(languageMenu, helpMenu, settings);
@@ -287,6 +287,14 @@ public class ChatView extends View<ChatModel> {
 
 	public Button getDeleteChatroom() {
 		return deleteChatroom;
+	}
+	
+	public MenuItem getLogout() {
+		return logout;
+	}
+	
+	public MenuItem getDeleteAcc() {
+		return deleteAcc;
 	}
 	
 	public Button getdefCreateChatroom() {

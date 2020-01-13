@@ -69,6 +69,18 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 		view.getbtnSend().setOnAction(e -> {
 			model.sendMessage(serviceL.getConfiguration().getJoinedChatroom(), view.getTxtMessage());
 		});
+		
+		view.getDeleteAcc().setOnAction(e -> {
+			model.deleteAccount(serviceL.getConfiguration().getToken());
+			view.getStage().close();
+		});
+		
+		view.getLogout().setOnAction(e -> {
+			model.saveChatroom(serviceL.getConfiguration().getChatMessages(), serviceL.getConfiguration().getJoinedChatroom());
+			model.logout(serviceL.getConfiguration().getToken());
+			view.getStage().close();
+		});
+		
 	}
 	
 	public class PeriodicChecker extends Thread

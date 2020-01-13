@@ -41,8 +41,10 @@ public class LoginController extends Controller<LoginModel, LoginView>{
       				try {
       					model.createAccount(view.getCreateUsername(), view.getCreatePassword(), view.getRepeatPassword());
       					
-      					// only if the account was created successfully
-      					view.getPopupStage().close();
+      					// oif the password match
+      					if (view.getCreatePassword().contentEquals(view.getRepeatPassword())) {
+          					view.getPopupStage().close();
+      					}
       				} catch (IOException e) {
       					// TODO Auto-generated catch block
       					e.printStackTrace();

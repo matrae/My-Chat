@@ -69,8 +69,7 @@ public class ChatModel extends Model {
 		} catch (ClassNotFoundException e) {
 			serviceLocator.getLogger().info("No file found for " + chatroom);
 		}
-        
-	}
+ 	}
 	
 	public void loadChatrooms() {		
 		// Server message to get chatrooms
@@ -159,4 +158,38 @@ public class ChatModel extends Model {
 			e.printStackTrace();
 		}
 	}
+	
+	public void logout(String token) {
+		String logout = "Logout" + "|" + token;
+		
+		  try {
+			 serviceLocator.getConfiguration().clearRooms();
+			 OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
+			 socketOut.write(logout + "\n");
+			 socketOut.flush();
+			 serviceLocator.getLogger().info("Sent: " + logout);
+	         serviceLocator.getConfiguration().communicateServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteAccount(String token) {
+		String deleteLogin = "DeleteLogin" + "|" + token;
+		
+		  try {
+			 serviceLocator.getConfiguration().clearRooms();
+			 OutputStreamWriter socketOut = new OutputStreamWriter(socket.getOutputStream());
+			 socketOut.write(deleteLogin + "\n");
+			 socketOut.flush();
+			 serviceLocator.getLogger().info("Sent: " + deleteLogin);
+	         serviceLocator.getConfiguration().communicateServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 }
