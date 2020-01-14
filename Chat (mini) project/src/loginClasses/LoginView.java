@@ -35,6 +35,7 @@ public class LoginView extends View<LoginModel> {
 	// Menu label
 	private Menu languageMenu;
 	private Menu helpMenu;
+	private MenuItem google;
      
 	// Create account stuff
 	private Stage createAccountPopup;
@@ -106,9 +107,11 @@ public class LoginView extends View<LoginModel> {
 		lblWrongInput.setText(trans.getString("program.login.WrongInput"));
 		lblWrongInput.setVisible(model.getState());
 		
+		
 		//Menut text
 		languageMenu.setText(trans.getString("program.menu.file.language"));
 		helpMenu.setText(trans.getString("program.menu.help"));
+		google.setText(trans.getString("program.menu.google"));
 	}
 	
 	private MenuBar createMenuBar()  {
@@ -120,9 +123,13 @@ public class LoginView extends View<LoginModel> {
 		//Menus without text, text is set in update method
 		languageMenu = new Menu();
 		helpMenu = new Menu();
-		        
+		google = new MenuItem();
+		
+		helpMenu.getItems().add(google);
+		
 		//Add menus to menubar
 		menu.getMenus().addAll(languageMenu, helpMenu);
+		
 		        
 		return menu;
 	}
@@ -234,6 +241,10 @@ public class LoginView extends View<LoginModel> {
 	
 	public Stage getPopupStage() {
 		return createAccountPopup;
+	}
+	
+	public MenuItem getGoogle() {
+		return google;
 	}
 	
 	public String getCreateUsername() {

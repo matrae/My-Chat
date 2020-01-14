@@ -81,6 +81,17 @@ public class ChatController extends Controller<ChatModel, ChatView> {
 			view.getStage().close();
 		});
 		
+		view.getHelp().setOnAction(e -> {
+			String url="www.Google.ch";
+			try {
+				java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+				serviceL.getLogger().info("Help link opened");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
 	}
 	
 	public class PeriodicChecker extends Thread

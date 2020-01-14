@@ -3,12 +3,15 @@ package loginClasses;
 import java.io.IOException;
 
 import App.ChatApp;
+import App.ServiceLocator;
 import abstractClasses.Controller;
 import abstractClasses.View;
 import chatClasses.ChatModel;
 import javafx.concurrent.Worker;
 
 public class LoginController extends Controller<LoginModel, LoginView>{
+	
+	ServiceLocator serviceL = ServiceLocator.getServiceLocator();
 	
 	@SuppressWarnings("unused")
 	public LoginController(final ChatApp main, LoginModel model, LoginView view) {
@@ -32,6 +35,17 @@ public class LoginController extends Controller<LoginModel, LoginView>{
 				e.printStackTrace();
 			}
      	});
+      	
+      	view.getGoogle().setOnAction(e -> {
+			String url="www.Google.ch";
+			try {
+				java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+				serviceL.getLogger().info("Help link opened");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+      	});
       	
 
       	// Creates the popup window where you can create an account
